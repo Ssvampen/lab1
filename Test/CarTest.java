@@ -15,8 +15,8 @@ public class CarTest {
     Car car;
 
     @Before
-    public void CarInitizlizer() {
-        volvo = new Volvo240();
+    public void CarInitzilizer() {
+        car = new Volvo240();
     }
 
     @Test
@@ -56,9 +56,23 @@ public class CarTest {
 
     @Test
     public void testTurnRight(){
-        volvo.turnRight();
-        assertTrue(volvo.getDirection() == Direction.EAST);
+        car.turnRight();
+        assertEquals(car.getDirection(), Direction.EAST);
     }
+
+    @Test
+    public void testTurnLeft(){
+        car.turnLeft();
+        assertEquals(car.getDirection(), Direction.WEST);
+    }
+
+    @Test
+    public void testSetColor(){
+        car.setColor(Color.BLACK);
+        assertEquals(car.getColor(), Color.BLACK);
+    }
+
+
 
 
 }

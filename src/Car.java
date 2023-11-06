@@ -81,12 +81,15 @@ public abstract class Car implements Movable {
 
 
     public void turnRight() {
-        int index = (this.direction.getIndex() + 1) % 4;
+
+        int index = (this.direction.getIndex() - 1);
+        if(index < 0){index = 3;}
         this.direction = Direction.fromIndex(index);
     }
 
     public void turnLeft() {
-        int index = (this.direction.getIndex() - 1) % 4;
+        int index = (this.direction.getIndex() + 1);
+        if(index > 3){index = 0;}
         this.direction = Direction.fromIndex(index);
     }
 
