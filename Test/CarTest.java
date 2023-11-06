@@ -1,10 +1,18 @@
+package Test;
+
 import org.junit.Before;
 import org.junit.Test;
+import java.awt.Color;
+import src.Car;
+import src.Direction;
+import src.Volvo240;
 
 import static org.junit.Assert.*;
 
+
+
 public class CarTest {
-    Volvo240 volvo;
+    Car car;
 
     @Before
     public void CarInitizlizer() {
@@ -13,12 +21,12 @@ public class CarTest {
 
     @Test
     public void testThatVolvoHasTwoDoors() {
-        assertEquals(volvo.getNrDoors(), 4);
+        assertEquals(car.getNrDoors(), 4);
     }
 
     @Test
     public void testInitialDirection(){
-       assertEquals(volvo.getDirection(), Direction.NORTH);
+       assertEquals(car.getDirection(), Direction.NORTH);
     }
 
     @Test
@@ -31,19 +39,19 @@ public class CarTest {
     @Test
     public void testThatEngineIsTurnedOffWhenCarIsCreated() {
         Volvo240 testCar = new Volvo240();
-        assertEquals(testCar.getCurrentSpeed(), 0);
+        assertEquals(testCar.getCurrentSpeed(), 0, 0.00001);
     }
 
     @Test
     public void testStopEngineSetsSpeedTo0(){
-        volvo.stopEngine();
-        assertEquals(volvo.getCurrentSpeed(), 0);
+        car.stopEngine();
+        assertEquals(car.getCurrentSpeed(), 0, 0.00001);
     }
 
     @Test
     public void testStartEngineSetsCorrectSpeed(){
-        volvo.startEngine();
-        assertEquals(volvo.getCurrentSpeed(), 0.1);
+        car.startEngine();
+        assertEquals(car.getCurrentSpeed(), 0.1, 0.00001);
     }
 
     @Test

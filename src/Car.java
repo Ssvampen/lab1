@@ -1,3 +1,5 @@
+package src;
+
 import java.awt.*;
 
 public abstract class Car implements Movable {
@@ -60,13 +62,23 @@ public abstract class Car implements Movable {
         decrementSpeed(amount);
     }
 
-    public abstract void incrementSpeed(double amount);
 
-    public abstract void decrementSpeed(double amount);
+    public void incrementSpeed(double amount){
+        currentSpeed = Math.min(getCurrentSpeed() + speedFactor() * amount,enginePower);
+    }
+
+    public void decrementSpeed(double amount){
+        currentSpeed = Math.max(getCurrentSpeed() - speedFactor() * amount,0);
+    }
+
+    public abstract double speedFactor();
+
 
     public void move() {
         this.position = this.position.add(direction.getVector().multiply(new Position(currentSpeed, currentSpeed)));
     }
+
+
 
     public void turnRight() {
         int index = (this.direction.getIndex() + 1) % 4;

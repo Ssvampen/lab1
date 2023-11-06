@@ -1,3 +1,5 @@
+package src;
+
 public enum Direction {
 
     NORTH(0, new Position(0, 1)),
