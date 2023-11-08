@@ -72,7 +72,50 @@ public class CarTest {
         assertEquals(car.getColor(), Color.BLACK);
     }
 
+    @Test
+    public void testSetGasWithAmountAbove1Fails() {
+        car.startEngine();
+        car.gas(2.0);
+        assertEquals(car.getCurrentSpeed(), 0.1);
+    }
 
+    @Test
+    public void testSetBrakeWithAmountAbove1Fails() {
+        car.startEngine();
+        car.brake(2.0);
+        assertEquals(car.getCurrentSpeed(), 0.1);
+    }
 
+    @Test
+    public void testAccelerateWithANegativeAmountOfBreak() {
+        car.startEngine();
+        car.gas(0.5);
+        double speedAfterGas = car.getCurrentSpeed();
+        car.brake(-0.9);
+        assertTrue(car.getCurrentSpeed() <= speedAfterGas);
+    }
+
+    @Test
+    public void testBreakWithANegativeAmountOfGas() {
+        car.startEngine();
+        car.gas(0.5);
+        double speedAfterFirstGas = car.getCurrentSpeed();
+        car.gas(-0.4);
+        assertTrue(car.getCurrentSpeed() >= speedAfterFirstGas);
+    }
+
+    @Test
+    public void testCurrentSpeedNeverExceedsEnginePower(){
+        car.startEngine();
+        car.gas(100000.0);
+        assertTrue(car.getCurrentSpeed() <= car.getEnginePower());
+    }
+
+    @Test
+    public void testCurrentSpeedNeverGoesBelowEnginePower(){
+        car.startEngine();
+        car.brake(100000.0);
+        assertTrue(car.getCurrentSpeed() >= 0);
+    }
 
 }

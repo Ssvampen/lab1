@@ -22,6 +22,11 @@ public class SaabTest {
     }
 
     @Test
+    public void testModelName(){
+        assertEquals(saab.getModelName(), "Saab95");
+    }
+
+    @Test
     public void testSpeedFactorWithTurboOff(){
         saab.setTurboOff();
         assertEquals(saab.speedFactor(), 1.25, 0.00001);

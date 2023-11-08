@@ -14,7 +14,7 @@ public abstract class Car implements Movable {
     protected double enginePower; // Engine power of the car
     protected double currentSpeed; // The current speed of the car
     private Color color; // Color of the car
-    public String modelName; // The car model name
+    private final String modelName; // The car model name
 
     private Direction direction; // The current direction of the
     private Vector position;
@@ -78,6 +78,10 @@ public abstract class Car implements Movable {
      * @param amount Inputted acceleration.
      */
     public void gas(double amount){
+        if(isSpeedOutsideMovementRange(amount)) {
+            return;
+        }
+
         incrementSpeed(amount);
     }
 
@@ -87,11 +91,19 @@ public abstract class Car implements Movable {
      * @param amount Inputted breakage.
      */
     public void brake(double amount){
+        if(isSpeedOutsideMovementRange(amount)) {
+            return;
+        }
+
         decrementSpeed(amount);
     }
 
-
-    public void incrementSpeed(double amount){
+    /**
+     * Increments the speed of the car with the specified amount.
+     * This can never exceed the engine power of the car.
+     * @param amount Amount to increment.
+     */
+    private void incrementSpeed(double amount){
         currentSpeed = Math.min(getCurrentSpeed() + speedFactor() * amount,enginePower);
     }
 
@@ -109,7 +121,9 @@ public abstract class Car implements Movable {
      */
     public abstract double speedFactor();
 
-
+    /**
+     * Moves the car in the current direction with the current speed.
+     */
     public void move() {
         this.position = this.position.add(direction.getVector().multiply(new Vector(currentSpeed, currentSpeed)));
     }
@@ -118,7 +132,6 @@ public abstract class Car implements Movable {
      * Turns the car 90 degrees right.
      */
     public void turnRight() {
-
         int index = (this.direction.getIndex() - 1);
         if(index < 0){index = 3;}
         this.direction = Direction.fromIndex(index);

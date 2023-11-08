@@ -50,4 +50,22 @@ public class Vector {
     public Vector multiply(Vector vector){
         return new Vector(getX() * vector.getX(), getY() * vector.getY());
     }
+
+
+    /**
+     * Checks if this Vector is equal to another.
+     * Compares X and Y component of two vectors, uses super.equals for all other objects.
+     * @param obj Object to compare with.
+     * @return Whether this Vector is equal to the provided object.
+     */
+    @Override
+    public boolean equals(Object obj) {
+        if(obj instanceof Vector v) {
+            return Math.abs(this.getX() - v.getX()) < 0.00001
+                && Math.abs(this.getY() - v.getY()) < 0.00001;
+        }
+
+        return super.equals(obj);
+    }
+
 }

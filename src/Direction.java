@@ -11,7 +11,11 @@ public enum Direction {
     EAST(3, new Vector(1, 0));
 
     private final int index;
-    private final Position vector;
+    private final Vector vector;
+
+    /**
+     * Static array of all values in this enum.
+     */
     private static final Direction[] VALUES = Direction.values();
 
     /**
