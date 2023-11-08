@@ -2,23 +2,39 @@ package src;
 
 import java.awt.*;
 
+/**
+ *
+ */
 public class Saab95 extends Car {
 
     public boolean turboOn;
 
+    /**
+     *
+     */
     public Saab95() {
         super(2, Color.red, 125, "Saab95");
         turboOn = false;
     }
 
+    /**
+     * Sets the attribte turboOn to true.
+     */
     public void setTurboOn() {
         turboOn = true;
     }
 
+    /**
+     * Sets the attribte turboOn to false.
+     */
     public void setTurboOff() {
         turboOn = false;
     }
 
+    /**
+     * Calculates the the cars speed factor based on the engine power and turbo
+     * @return A speed factor which is a (double)
+     */
     @Override
     public double speedFactor() {
         double turbo = 1;

@@ -2,6 +2,12 @@ package src;
 
 import java.awt.*;
 
+/**
+ * Car is a class with the basic car attributes and methods that apply to most modern cars.
+ * Car has attributes within the likes of number of doors, engine power, model name, and so on.
+ * The Car class also implements the basic car features (methods) such as start car, stop car, accelerate and decelerate.
+ * The interface "Moveble" is also implemented which requires the implementation of various methods to move the car.
+ */
 public abstract class Car implements Movable {
 
     private final int nrDoors; // Number of doors on the car
@@ -10,15 +16,15 @@ public abstract class Car implements Movable {
     private Color color; // Color of the car
     public String modelName; // The car model name
 
-    private Direction direction;
-    private Position position;
+    private Direction direction; // The current direction of the
+    private Vector position;
 
     public Car(int nrDoors, Color color, int enginePower, String modelName) {
         this.nrDoors = nrDoors;
         this.color = color;
         this.enginePower = enginePower;
         this.modelName = modelName;
-        this.position = Position.zero();
+        this.position = Vector.zero();
         this.direction = Direction.NORTH;
 
         stopEngine();
@@ -44,20 +50,42 @@ public abstract class Car implements Movable {
         color = clr;
     }
 
+    /**
+     * Sets the cars current speed to 0.1.
+     */
     public void startEngine(){
         currentSpeed = 0.1;
     }
 
+    /**
+     * Sets the cars current speed to 0.
+     */
     public void stopEngine() {
         currentSpeed = 0;
     }
 
-    // TODO fix this method according to lab pm
+    /**
+     * @param amount Inputted acceleration.
+     * @return True if the speed is not within the range [0,1].
+     */
+    private static boolean isSpeedOutsideMovementRange(double amount){
+        return amount < 0.0 || amount > 1.0;
+    }
+
+    /**
+     * Increments the speed using the formula used in the incrementSpeed() method.
+     * Should be within range [0, 1].
+     * @param amount Inputted acceleration.
+     */
     public void gas(double amount){
         incrementSpeed(amount);
     }
 
-    // TODO fix this method according to lab pm
+    /**
+     * Decreases the cars speed using the formula in the decrementSpeed() method.
+     * Should be within range [0, 1].
+     * @param amount Inputted breakage.
+     */
     public void brake(double amount){
         decrementSpeed(amount);
     }
@@ -67,19 +95,28 @@ public abstract class Car implements Movable {
         currentSpeed = Math.min(getCurrentSpeed() + speedFactor() * amount,enginePower);
     }
 
-    public void decrementSpeed(double amount){
+    /**
+     * Decrements the speed of the car with the specified amount.
+     * This can never go below 0.
+     * @param amount Amount to decrement.
+     */
+    private void decrementSpeed(double amount){
         currentSpeed = Math.max(getCurrentSpeed() - speedFactor() * amount,0);
     }
 
+    /**
+     * Speed factor of this car, how much it should accelerate.
+     */
     public abstract double speedFactor();
 
 
     public void move() {
-        this.position = this.position.add(direction.getVector().multiply(new Position(currentSpeed, currentSpeed)));
+        this.position = this.position.add(direction.getVector().multiply(new Vector(currentSpeed, currentSpeed)));
     }
 
-
-
+    /**
+     * Turns the car 90 degrees right.
+     */
     public void turnRight() {
 
         int index = (this.direction.getIndex() - 1);
@@ -87,6 +124,9 @@ public abstract class Car implements Movable {
         this.direction = Direction.fromIndex(index);
     }
 
+    /**
+     * Turns the car 90 degrees left.
+     */
     public void turnLeft() {
         int index = (this.direction.getIndex() + 1);
         if(index > 3){index = 0;}
@@ -97,8 +137,11 @@ public abstract class Car implements Movable {
         return direction;
     }
 
-    public Position getPosition() {
+    public Vector getPosition() {
         return position;
     }
 
+    public String getModelName() {
+        return modelName;
+    }
 }
