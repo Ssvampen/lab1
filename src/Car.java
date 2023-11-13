@@ -120,6 +120,17 @@ public abstract class Car implements Movable {
     }
 
     /**
+     * Test if speed is 0
+     * @return true if vehicle is stationary, else false
+     */
+    protected boolean vehicleIsStationary() {
+        if (currentSpeed == 0) {
+            return true;
+        }
+        return false;
+    }
+
+    /**
      * Speed factor of this car, how much it should accelerate.
      */
     public abstract double speedFactor();
