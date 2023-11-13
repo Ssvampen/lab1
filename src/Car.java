@@ -1,5 +1,8 @@
 package src;
 
+import src.util.Direction;
+import src.util.Vector;
+
 import java.awt.*;
 
 /**

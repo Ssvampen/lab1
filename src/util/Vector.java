@@ -1,4 +1,4 @@
-package src;
+package src.util;
 
 /**
  * Represents an immutable 2D vector.

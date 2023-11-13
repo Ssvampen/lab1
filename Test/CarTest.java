@@ -4,7 +4,7 @@ import org.junit.Before;
 import org.junit.Test;
 import java.awt.Color;
 import src.Car;
-import src.Direction;
+import src.util.Direction;
 import src.Volvo240;
 
 import static org.junit.Assert.*;

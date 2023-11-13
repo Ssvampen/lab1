@@ -1,4 +1,4 @@
-package src;
+package src.util;
 
 /**
  * Represents one of the four cardinal directions and their corresponding movement vector.
