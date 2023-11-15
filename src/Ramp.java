@@ -2,6 +2,10 @@ package src;
 
 import java.util.Stack;
 
+import src.util.Direction;
+import src.util.Vector;
+import src.util.WeightClass;
+
 public class Ramp implements Hinged {
 
     private boolean isRaised;

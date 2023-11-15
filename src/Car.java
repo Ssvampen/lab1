@@ -173,6 +173,10 @@ public abstract class Car implements Movable {
         return position;
     }
 
+    public void setPosition(Vector position) {
+        this.position = position;
+    }
+
     public String getModelName() {
         return modelName;
     }
