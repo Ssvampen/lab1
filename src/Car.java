@@ -2,6 +2,7 @@ package src;
 
 import src.util.Direction;
 import src.util.Vector;
+import src.util.WeightClass;
 
 import java.awt.*;
 
@@ -22,13 +23,16 @@ public abstract class Car implements Movable {
     private Direction direction; // The current direction of the
     private Vector position;
 
-    public Car(int nrDoors, Color color, int enginePower, String modelName) {
+
+
+    public Car(int nrDoors, Color color, int enginePower, String modelName, WeightClass weightClass) {
         this.nrDoors = nrDoors;
         this.color = color;
         this.enginePower = enginePower;
         this.modelName = modelName;
         this.position = Vector.zero();
         this.direction = Direction.NORTH;
+        this.weightClass = weightClass;
 
         stopEngine();
     }
@@ -171,4 +175,9 @@ public abstract class Car implements Movable {
     public String getModelName() {
         return modelName;
     }
+
+    public WeightClass getWeightClass() {
+        return weightClass;
+    }
+
 }

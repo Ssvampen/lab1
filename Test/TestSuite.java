@@ -1,3 +1,5 @@
+package Test;
+
 import Test.CarTest;
 import Test.SaabTest;
 import Test.VolvoTest;
