@@ -6,10 +6,11 @@ import java.awt.*;
 // TODO: Make code Niklas-approved
 public class Scania extends Truck {
 
-    private LoadingPlatform loadingPlatform;
+    private final LoadingPlatform loadingPlatform;
 
-    public Scania(){
-        super(2, Color.BLUE, 200, "Scania 1337");
+    public Scania(LoadingPlatform loadingPlatform){
+        super(2, Color.BLUE, 200, "Scania 1337", loadingPlatform);
+        this.loadingPlatform = loadingPlatform;
     }
 
     public void increaseLoadingPlatformAngle(float amount) {

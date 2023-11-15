@@ -10,7 +10,7 @@ import java.awt.*;
  * Car is a class with the basic car attributes and methods that apply to most modern cars.
  * Car has attributes within the likes of number of doors, engine power, model name, and so on.
  * The Car class also implements the basic car features (methods) such as start car, stop car, accelerate and decelerate.
- * The interface "Moveble" is also implemented which requires the implementation of various methods to move the car.
+ * The interface "Movable" is also implemented which requires the implementation of various methods to move the car.
  */
 public abstract class Car implements Movable {
 
@@ -19,6 +19,7 @@ public abstract class Car implements Movable {
     protected double currentSpeed; // The current speed of the car
     private Color color; // Color of the car
     private final String modelName; // The car model name
+    protected WeightClass weightClass; // The weight class of the car. Is defined by an enum
 
     private Direction direction; // The current direction of the
     private Vector position;

@@ -45,6 +45,16 @@ public class Ramp implements Hinged {
         return null;
     }
 
+    /**
+     * Moves all cars (independent of every individual cars enginepower...) to the same position of the parent car
+     * @param position Position of parent car
+     */
+    public void teleportCars(Vector position) {
+        for(Car car : cars){
+            car.setPosition(position);
+        }
+    }
+
     public void raise(){
         isRaised = true;
     }
