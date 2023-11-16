@@ -14,6 +14,9 @@ public class Scania extends Truck {
     }
 
     public void increaseLoadingPlatformAngle(float amount) {
+        if(!vehicleIsStationary())
+            return;
+
         loadingPlatform.raise(amount);
     }
 

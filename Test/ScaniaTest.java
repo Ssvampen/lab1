@@ -33,11 +33,11 @@ public class ScaniaTest {
     }
 
     @Test
-    public void testCanIncreaseLoadingPlatformWhenDriving(){
+    public void testCannotIncreaseLoadingPlatformWhenDriving(){
         scania.startEngine();
         scania.gas(1);
         scania.increaseLoadingPlatformAngle(1);
-        assertTrue(scania.attacheableIsUp());
+        assertFalse(scania.attacheableIsUp());
     }
 
 
@@ -47,6 +47,6 @@ public class ScaniaTest {
         scania.gas(1);
         scania.increaseLoadingPlatformAngle(70);
         scania.decreaseLoadingPlatformAngle(70);
-        assertTrue(scania.attacheableIsUp());
+        assertFalse(scania.attacheableIsUp());
     }
 }
