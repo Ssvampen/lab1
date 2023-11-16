@@ -18,7 +18,7 @@ public class ObjectStorageTest {
     @Before
     public void ObjectStorageInitializer(){
         maxObjects = 5;
-        storage = new ObjectStorage<Volvo240>(10);
+        storage = new ObjectStorage<Volvo240>(maxObjects);
     }
 
     @Test
@@ -26,6 +26,6 @@ public class ObjectStorageTest {
         for(int i = 0; i < maxObjects+1; i++){
             storage.addObject(new Volvo240());
         }
-        assertEquals(storage.getSize(), maxObjects);
+        assertEquals(maxObjects, storage.getSize());
     }
 }

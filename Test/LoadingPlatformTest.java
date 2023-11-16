@@ -46,5 +46,18 @@ public class LoadingPlatformTest {
         assertEquals(0.0, loadingPlatform.getAngle(), 0.0001);
     }
 
+    @Test
+    public void testCannotLowerNegative(){
+        loadingPlatform.lower(-100.0);
+        assertEquals(0.0, loadingPlatform.getAngle(), 0.0001);
+    }
+
+
+    @Test
+    public void testCannotRaiseNegative(){
+        loadingPlatform.raise(-100.0);
+        assertEquals(0.0, loadingPlatform.getAngle(), 0.0001);
+    }
+
 
 }

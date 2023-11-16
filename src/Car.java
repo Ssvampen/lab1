@@ -112,6 +112,9 @@ public abstract class Car implements Movable {
      * @param amount Amount to increment.
      */
     private void incrementSpeed(double amount){
+        if(currentSpeed == 0)
+            return;
+
         currentSpeed = Math.min(getCurrentSpeed() + speedFactor() * amount,enginePower);
     }
 
@@ -128,11 +131,8 @@ public abstract class Car implements Movable {
      * Test if speed is 0
      * @return true if vehicle is stationary, else false
      */
-    protected boolean vehicleIsStationary() {
-        if (currentSpeed == 0) {
-            return true;
-        }
-        return false;
+    public boolean vehicleIsStationary() {
+        return currentSpeed == 0;
     }
 
     /**

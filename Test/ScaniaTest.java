@@ -18,9 +18,9 @@ public class ScaniaTest {
     }
 
     @Test
-    public void testIfCanDriveWhenLoadingPlatformDown(){
+    public void testCannotStartEngineWithLoadingPlatformDown(){
+        scania.increaseLoadingPlatformAngle(20);
         scania.startEngine();
-        scania.decreaseLoadingPlatformAngle(1);
         scania.gas(1);
         scania.move();
         assertEquals(scania.getPosition(), Vector.zero());
@@ -28,10 +28,25 @@ public class ScaniaTest {
     }
 
     @Test
-    public void testIfCanLowerLoadingPlatformWhileDriving(){
+    public void testSpeedFactor(){
+        assertEquals(scania.speedFactor(), 2, 0.00001);
+    }
+
+    @Test
+    public void testCanIncreaseLoadingPlatformWhenDriving(){
         scania.startEngine();
         scania.gas(1);
-        scania.decreaseLoadingPlatformAngle(1);
+        scania.increaseLoadingPlatformAngle(1);
+        assertTrue(scania.attacheableIsUp());
+    }
+
+
+    @Test
+    public void testCannotDecreaseLoadingPlatformWhenDriving(){
+        scania.startEngine();
+        scania.gas(1);
+        scania.increaseLoadingPlatformAngle(70);
+        scania.decreaseLoadingPlatformAngle(70);
         assertTrue(scania.attacheableIsUp());
     }
 }

@@ -17,4 +17,8 @@ public class Mechanic<T extends Car> {
         return car;
     }
 
+    public int getCarCount(){
+        return cars.getSize();
+    }
+
 }

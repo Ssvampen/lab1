@@ -19,9 +19,10 @@ public class Scania extends Truck {
 
     public void decreaseLoadingPlatformAngle(float amount) {
         // The vehicle should not be able to move when "loading platform" is up. Therefor it is not necessary to check whether the vehicle is moving or not
-        if(vehicleIsStationary()){
-            loadingPlatform.lower(amount);
-        }
+        if(!vehicleIsStationary())
+            return;
+
+        loadingPlatform.lower(amount);
     }
 
     @Override

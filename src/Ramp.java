@@ -19,11 +19,7 @@ public class Ramp implements Hinged {
         cars = new ObjectStorage<Car>(maxCars);
     }
 
-    //TODO add limit to number of cars
     public void addCar(Car car){
-        /*
-        Every truck has to be in the weight class
-         */
         if(attacheableIsUp())
             return;
 
@@ -36,14 +32,15 @@ public class Ramp implements Hinged {
 
     /**
      * TODO: FIX THE NULL RETURN STATEMENT. SHOULDN'T BE THERE!!
-     * @param direction
+     * @param parentDirection
      * @return
      */
-    public Car removeCar(Direction direction){
+    public Car removeCar(Direction parentDirection){
         if(!attacheableIsUp()) {
             Car car = cars.removeLastObject();
             car.setPosition(car.getPosition().add(
-                    car.getDirection().getVector().multiply(new Vector(-2,-2))));
+                    parentDirection.getVector().multiply(new Vector(-2,-2))));
+
             return car;
         }
         return null;
@@ -65,6 +62,10 @@ public class Ramp implements Hinged {
 
     public void lower(){
         isRaised = false;
+    }
+
+    public int getCarCount(){
+        return cars.getSize();
     }
 
     @Override

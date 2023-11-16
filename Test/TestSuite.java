@@ -18,7 +18,6 @@ import src.Scania;
         ObjectStorageTest.class,
         RampTest.class,
         SaabTest.class,
-        TruckTest.class,
         VolvoTest.class,
         ScaniaTest.class
 })

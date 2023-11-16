@@ -40,10 +40,6 @@ public class Lorry extends Truck implements Rampable {
         return this.ramp.removeCar(getDirection());
     }
 
-    public void setRamp(Ramp ramp) {
-        this.ramp = ramp;
-    }
-
     @Override
     public double speedFactor() {
         return enginePower * 0.01;

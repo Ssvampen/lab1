@@ -3,19 +3,26 @@ package src;
 import java.util.*;
 
 public class ObjectStorage<T> implements Iterable<T> {
-    private List<T> objects;
-    private int maxObjects;
+    private final List<T> objects;
+    private final int maxObjects;
 
     public ObjectStorage(int maxObjects) {
         this.maxObjects = maxObjects;
+        this.objects = new ArrayList<>();
     }
 
     public void addObject(T object){
+        if(this.getSize()  >= maxObjects) // Don't allow adding more than maxObjects
+            return;
+
         objects.add(object);
     }
 
     public T removeLastObject(){
-        T object = objects.get(-1);
+        if(objects.isEmpty())
+            return null;
+
+        T object = objects.get(objects.size() - 1);
         objects.remove(object);
         return object;
     }
