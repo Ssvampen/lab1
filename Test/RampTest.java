@@ -45,6 +45,7 @@ public class RampTest {
     @Test
     public void testAddAndRemoveCarCount0(){
         Volvo240 car = new Volvo240();
+        ramp.lowerRamp();
         ramp.addCar(car);
         ramp.removeCar(Direction.NORTH);
         assertEquals(0, ramp.getCarCount());

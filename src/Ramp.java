@@ -4,6 +4,9 @@ import src.util.Direction;
 import src.util.Vector;
 import src.util.WeightClass;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * Represents a Ramp that can have cars on it.
  */
@@ -59,7 +62,7 @@ public class Ramp implements Hinged, Rampable {
      * @param position Position of parent car
      */
     public void teleportCars(Vector position) {
-        for(Car car : cars){
+        for(Car car: cars){
             car.setPosition(position);
         }
     }

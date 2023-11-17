@@ -77,4 +77,8 @@ public class Vector {
         return super.equals(obj);
     }
 
+    @Override
+    public String toString() {
+        return "(" + getX() + "," + getY() + ")";
+    }
 }

@@ -2,15 +2,10 @@ package Test;
 
 import org.junit.Before;
 import org.junit.Test;
-import src.Lorry;
-import src.Ramp;
-import src.Volvo240;
-import src.util.Direction;
+import src.*;
 import src.util.Vector;
-import src.Car;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.*;
 
 public class LorryTest {
     private Lorry lorry;
@@ -25,7 +20,7 @@ public class LorryTest {
 
     @Test
     public void testCannotStartEngineWithRampDown(){
-        lorry.raiseRamp();
+        lorry.lowerRamp();
         lorry.startEngine();
         lorry.gas(1);
         lorry.move();
@@ -36,11 +31,11 @@ public class LorryTest {
     public void testAddCarNearLorryToLorrysRamp() {
         Volvo240 car = new Volvo240();
         car.setPosition(new Vector(1,1));
+        lorry.lowerRamp();
         lorry.setPosition(new Vector(1,1));
         lorry.addCar(car);
         assertEquals(1, lorry.getCarCount());
     }
-
 
     @Test
     public void testSpeedFactor(){
@@ -68,14 +63,24 @@ public class LorryTest {
     @Test
     public void testRemoveCarSetsCorrectPosition(){
         Volvo240 car = new Volvo240();
+        Volvo240 car2 = new Volvo240();
+
+        lorry.lowerRamp();
         lorry.addCar(car);
+        lorry.addCar(car2);
+        lorry.raiseRamp();
         lorry.startEngine();
         lorry.turnLeft();
+
         lorry.move();
         lorry.move(); // Position: (-0.2, 0.0)
+        lorry.stopEngine();
+        lorry.lowerRamp();
+        lorry.removeCar();
         lorry.removeCar();
 
         assertEquals(new Vector(-0.2 +  2.0, 0.0), car.getPosition());
+        assertEquals(new Vector(-0.2 +  4.0, 0.0), car2.getPosition());
     }
 
     @Test
