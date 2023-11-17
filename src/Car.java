@@ -24,8 +24,14 @@ public abstract class Car implements Movable {
     private Direction direction; // The current direction of the
     private Vector position;
 
-
-
+    /**
+     * Constructor
+     * @param nrDoors Number of doors.
+     * @param color Color of the vehicle.
+     * @param enginePower The engine power.
+     * @param modelName The vehicles model name.
+     * @param weightClass The vehicles weight class
+     */
     public Car(int nrDoors, Color color, int enginePower, String modelName, WeightClass weightClass) {
         this.nrDoors = nrDoors;
         this.color = color;

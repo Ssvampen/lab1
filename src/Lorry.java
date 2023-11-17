@@ -9,6 +9,10 @@ public class Lorry extends Truck implements Rampable {
     // Is not set to final because the lorry can (if implemented) change ramp
     private Ramp ramp;
 
+    /**
+     * Contructor.
+     * @param ramp The ramp connected to this instance of a lorry.
+     */
     public Lorry(Ramp ramp) {
         super(2, Color.YELLOW, 200, "någon långtradarmodell", ramp);
         this.ramp = ramp;
