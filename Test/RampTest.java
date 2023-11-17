@@ -24,14 +24,14 @@ public class RampTest {
     @Test
     public void testRaiseRampIsUp(){
         ramp.raiseRamp();
-        assertTrue(ramp.attacheableIsUp());
+        assertFalse(ramp.attacheableIsDown());
     }
 
     @Test
     public void testRaiseAndLowerIsDown(){
         ramp.raiseRamp();
         ramp.lowerRamp();
-        assertFalse(ramp.attacheableIsUp());
+        assertTrue(ramp.attacheableIsDown());
     }
 
     @Test

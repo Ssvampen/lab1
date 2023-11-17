@@ -31,15 +31,15 @@ public abstract class Truck extends Car implements Hinged {
      */
     @Override
     public void startEngine() {
-        if(hinged.attacheableIsUp())
+        if(hinged.attacheableIsDown())
             return;
 
         super.startEngine();
     }
 
     @Override
-    public boolean attacheableIsUp() {
-        return hinged.attacheableIsUp();
+    public boolean attacheableIsDown() {
+        return hinged.attacheableIsDown();
     }
 
 }

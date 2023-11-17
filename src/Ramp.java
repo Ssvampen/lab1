@@ -17,6 +17,10 @@ public class Ramp implements Hinged, Rampable {
     // private final Stack<Car> cars;
 
     private final ObjectStorage<Car> cars;
+    private List<Car> unloadedCars = new ArrayList<>();
+    /** The list unloadedCars is used to prevent cars being placed on the
+    * same spot when unloaded.
+     * */
 
 
     /**
@@ -34,7 +38,7 @@ public class Ramp implements Hinged, Rampable {
      * @param car Car to add
      */
     public void addCar(Car car){
-        if(attacheableIsUp())
+        if(!attacheableIsDown())
             return;
 
         // Can't add HUMONGOUS cars or ramped cars
@@ -49,7 +53,7 @@ public class Ramp implements Hinged, Rampable {
      * @param parentDirection Direction of the truck with the ramp on it.
      */
     public void removeCar(Direction parentDirection){
-        if(attacheableIsUp())
+        if(!attacheableIsDown())
             return;
 
         Car car = cars.removeLastObject();
@@ -83,7 +87,7 @@ public class Ramp implements Hinged, Rampable {
     }
 
     @Override
-    public boolean attacheableIsUp() {
-        return isRaised;
+    public boolean attacheableIsDown() {
+        return !isRaised;
     }
 }

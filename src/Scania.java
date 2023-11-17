@@ -4,6 +4,8 @@ import java.awt.*;
 
 /**
  * Represents a Scania model 1337 with a loading platform.
+ *
+ * Termminoli
  */
 public class Scania extends Truck {
 
@@ -26,7 +28,7 @@ public class Scania extends Truck {
         if(!vehicleIsStationary())
             return;
 
-        loadingPlatform.raise(amount);
+        loadingPlatform.increasePlatformAngle(amount);
     }
 
     /**
@@ -38,7 +40,7 @@ public class Scania extends Truck {
         if(!vehicleIsStationary())
             return;
 
-        loadingPlatform.lower(amount);
+        loadingPlatform.decreasePlatformAngle(amount);
     }
 
     @Override

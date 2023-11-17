@@ -15,9 +15,6 @@ public class LorryTest {
         lorry = new Lorry(new Ramp(5));
     }
 
-    // TODO: we don't want to expose getRamp() but that breaks EVERYTHING with Rampable....
-
-
     @Test
     public void testCannotStartEngineWithRampDown(){
         lorry.lowerRamp();
@@ -56,7 +53,7 @@ public class LorryTest {
         lorry.startEngine();
         lorry.move();
         lorry.lowerRamp();
-        assertTrue(lorry.attacheableIsUp());
+        assertFalse(lorry.attacheableIsDown());
     }
 
 

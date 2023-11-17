@@ -3,6 +3,7 @@ package Test;
 import org.junit.Before;
 import org.junit.Test;
 import src.Mechanic;
+import src.Saab95;
 import src.Volvo240;
 
 import static org.junit.Assert.assertEquals;
@@ -38,5 +39,6 @@ public class MechanicTest {
         mechanic.returnCar(new Volvo240());
         assertEquals(mechanic.getCarCount(), 1);
     }
+
 
 }

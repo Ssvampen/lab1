@@ -37,7 +37,7 @@ public class ScaniaTest {
         scania.startEngine();
         scania.gas(1);
         scania.increaseLoadingPlatformAngle(1);
-        assertFalse(scania.attacheableIsUp());
+        assertFalse(scania.attacheableIsDown());
     }
 
 
@@ -47,6 +47,6 @@ public class ScaniaTest {
         scania.gas(1);
         scania.increaseLoadingPlatformAngle(70);
         scania.decreaseLoadingPlatformAngle(70);
-        assertFalse(scania.attacheableIsUp());
+        assertFalse(scania.attacheableIsDown());
     }
 }

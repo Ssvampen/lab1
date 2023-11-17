@@ -5,7 +5,7 @@ package src;
  */
 public interface Rampable {
     /**
-     * Raises the ramp.
+     * Raises the ramp (the truck can drive when ramp is raised).
      */
     void raiseRamp();
 

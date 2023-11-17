@@ -20,7 +20,7 @@ public class LoadingPlatform implements Hinged {
      * Increases the attribute angle.
      * @param amount The amount which the loading platform should be raised.
      */
-    public void raise(double amount){
+    public void increasePlatformAngle(double amount){
         angle = Math.min(angle + restrictAngleAmount(amount), 70);
     }
 
@@ -28,12 +28,12 @@ public class LoadingPlatform implements Hinged {
      * Decreases the attribute angle.
      * @param amount The amount which the loading platform should be lowered.
      */
-    public void lower(double amount){
+    public void decreasePlatformAngle(double amount){
         angle = Math.max(angle - restrictAngleAmount(amount), 0);
     }
 
     @Override
-    public boolean attacheableIsUp(){
+    public boolean attacheableIsDown(){
         return angle > 0;
     }
 
