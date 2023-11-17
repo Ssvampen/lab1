@@ -38,7 +38,7 @@ public class LorryTest {
         car.setPosition(new Vector(1,1));
         lorry.setPosition(new Vector(1,1));
         lorry.addCar(car);
-        assertEquals(1, lorry.getRamp().getCarCount());
+        assertEquals(1, lorry.getCarCount());
     }
 
 
@@ -51,7 +51,7 @@ public class LorryTest {
     public void testCannotAddCarWithRampUp(){
        lorry.raiseRamp();
        lorry.addCar(new Volvo240());
-       assertEquals(0, lorry.getRamp().getCarCount());
+       assertEquals(0, lorry.getCarCount());
     }
 
     @Test

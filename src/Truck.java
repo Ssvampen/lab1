@@ -13,6 +13,10 @@ public abstract class Truck extends Car implements Hinged {
         this.hinged = hinged;
     }
 
+    /**
+     * Stars the engine of the truck.
+     * Cannot be started if the truck's carriage is up.
+     */
     @Override
     public void startEngine() {
         if(hinged.attacheableIsUp())

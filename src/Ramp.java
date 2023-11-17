@@ -1,12 +1,13 @@
 package src;
 
-import java.util.Stack;
-
 import src.util.Direction;
 import src.util.Vector;
 import src.util.WeightClass;
 
-public class Ramp implements Hinged {
+/**
+ * Represents a Ramp that can have cars on it.
+ */
+public class Ramp implements Hinged, Rampable {
 
     private boolean isRaised;
 
@@ -15,10 +16,20 @@ public class Ramp implements Hinged {
     private final ObjectStorage<Car> cars;
 
 
+    /**
+     * Constructs a ramp.
+     * @param maxCars Maximum amount of cars that this ramp can hold.
+     */
     public Ramp(int maxCars){
         cars = new ObjectStorage<Car>(maxCars);
     }
 
+    /**
+     * Adds a car to the ramp.
+     * The ramp must be down and the car to add cannot be humongous or have a ramp.
+     *
+     * @param car Car to add
+     */
     public void addCar(Car car){
         if(attacheableIsUp())
             return;
@@ -31,19 +42,16 @@ public class Ramp implements Hinged {
     }
 
     /**
-     * TODO: FIX THE NULL RETURN STATEMENT. SHOULDN'T BE THERE!!
-     * @param parentDirection
-     * @return
+     * Removes a car from the ramp.
+     * @param parentDirection Direction of the truck with the ramp on it.
      */
-    public Car removeCar(Direction parentDirection){
-        if(!attacheableIsUp()) {
-            Car car = cars.removeLastObject();
-            car.setPosition(car.getPosition().add(
-                    parentDirection.getVector().multiply(new Vector(-2,-2))));
+    public void removeCar(Direction parentDirection){
+        if(attacheableIsUp())
+            return;
 
-            return car;
-        }
-        return null;
+        Car car = cars.removeLastObject();
+        car.setPosition(car.getPosition().add(
+                parentDirection.getVector().multiply(new Vector(-2,-2))));
     }
 
     /**
@@ -56,14 +64,17 @@ public class Ramp implements Hinged {
         }
     }
 
-    public void raise(){
+    @Override
+    public void raiseRamp(){
         isRaised = true;
     }
 
-    public void lower(){
+    @Override
+    public void lowerRamp(){
         isRaised = false;
     }
 
+    @Override
     public int getCarCount(){
         return cars.getSize();
     }

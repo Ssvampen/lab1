@@ -2,7 +2,6 @@ package Test;
 
 import src.Lorry;
 import src.Ramp;
-import src.Car;
 
 import static org.junit.Assert.*;
 
@@ -10,8 +9,6 @@ import org.junit.Before;
 import org.junit.Test;
 import src.Volvo240;
 import src.util.Direction;
-
-import java.awt.*;
 
 
 public class RampTest {
@@ -26,14 +23,14 @@ public class RampTest {
 
     @Test
     public void testRaiseRampIsUp(){
-        ramp.raise();
+        ramp.raiseRamp();
         assertTrue(ramp.attacheableIsUp());
     }
 
     @Test
     public void testRaiseAndLowerIsDown(){
-        ramp.raise();
-        ramp.lower();
+        ramp.raiseRamp();
+        ramp.lowerRamp();
         assertFalse(ramp.attacheableIsUp());
     }
 
@@ -57,7 +54,7 @@ public class RampTest {
     public void testCannotAddRampedCar(){
         Lorry lorry = new Lorry(new Ramp(10));
         ramp.addCar(lorry);
-        assertEquals(0, lorry.getRamp().getCarCount());
+        assertEquals(0, lorry.getCarCount());
     }
 
 }

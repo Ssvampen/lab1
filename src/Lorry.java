@@ -2,6 +2,9 @@ package src;
 
 import java.awt.*;
 
+/**
+ * Represents a Lorry that can transport other cars.
+ */
 public class Lorry extends Truck implements Rampable {
     // Is not set to final because the lorry can (if implemented) change ramp
     private Ramp ramp;
@@ -11,12 +14,19 @@ public class Lorry extends Truck implements Rampable {
         this.ramp = ramp;
     }
 
+    /**
+     * Adds a car to this lorry's ramp. The car must be within 1 meters of the lorry.
+     * Sets the child car position to the lorry position.
+     *
+     * @param car Car to add.
+     */
     public void addCar(Car car) {
         if(car.getPosition().distance(this.getPosition()) >= 1.0){
             return;
         }
 
         this.ramp.addCar(car);
+        car.setPosition(this.getPosition()); // Set car position to parent position
     }
 
     @Override
@@ -25,19 +35,29 @@ public class Lorry extends Truck implements Rampable {
         this.ramp.teleportCars(getPosition());
     }
 
+    @Override
     public void raiseRamp(){
-        this.ramp.raise();
+        this.ramp.raiseRamp();
     }
 
+    @Override
     public void lowerRamp(){
         if(!vehicleIsStationary())
             return;
 
-        this.ramp.lower();
+        this.ramp.lowerRamp();
     }
 
-    public Car removeCar(){
-        return this.ramp.removeCar(getDirection());
+    /**
+     * Removes car from the lorry's ramp.
+     */
+    public void removeCar(){
+        this.ramp.removeCar(getDirection());
+    }
+
+    @Override
+    public int getCarCount(){
+        return ramp.getCarCount();
     }
 
     @Override
@@ -45,8 +65,4 @@ public class Lorry extends Truck implements Rampable {
         return enginePower * 0.01;
     }
 
-    @Override
-    public Ramp getRamp() {
-        return this.ramp;
-    }
 }
