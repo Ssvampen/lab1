@@ -7,6 +7,7 @@ import java.awt.*;
 /**
  * The truck class is a vehicle (Car) that is expected to have a carrige.
  */
+
 public abstract class Truck extends Car implements Hinged {
 
     private final Hinged hinged;

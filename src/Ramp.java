@@ -49,7 +49,7 @@ public class Ramp implements Hinged, Rampable {
     }
 
     /**
-     * Removes a car from the ramp.
+     * Removes a car from the ramp. Moves all cars in unloadedCars to prevent overlapping positions.
      * @param parentDirection Direction of the truck with the ramp on it.
      */
     public void removeCar(Direction parentDirection){
@@ -57,8 +57,32 @@ public class Ramp implements Hinged, Rampable {
             return;
 
         Car car = cars.removeLastObject();
-        car.setPosition(car.getPosition().add(
-                parentDirection.getVector().multiply(new Vector(-2,-2))));
+        unloadedCars.add(car);
+
+        for(Car unloadedCar : unloadedCars) {
+            switch (parentDirection){
+                case NORTH: {
+                    unloadedCar.setPosition(unloadedCar.getPosition().add(new Vector(0, -2)));
+                    break;
+                }
+                case EAST: {
+                    unloadedCar.setPosition(unloadedCar.getPosition().add(new Vector(-2, 0)));
+                    break;
+                }
+                case WEST:{
+                    unloadedCar.setPosition(unloadedCar.getPosition().add(new Vector(2, 0)));
+                    break;
+                }
+                case SOUTH: {
+                    unloadedCar.setPosition(unloadedCar.getPosition().add(new Vector(0, 2)));
+                    break;
+                }
+            }
+        }
+    }
+
+    private void deleteUnloadedCarsList(){
+        unloadedCars = new ArrayList<Car>();
     }
 
     /**
@@ -74,6 +98,7 @@ public class Ramp implements Hinged, Rampable {
     @Override
     public void raiseRamp(){
         isRaised = true;
+        deleteUnloadedCarsList();
     }
 
     @Override
