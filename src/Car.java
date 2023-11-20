@@ -1,12 +1,16 @@
 package src;
 
+import src.util.Direction;
+import src.util.Vector;
+import src.util.WeightClass;
+
 import java.awt.*;
 
 /**
  * Car is a class with the basic car attributes and methods that apply to most modern cars.
  * Car has attributes within the likes of number of doors, engine power, model name, and so on.
  * The Car class also implements the basic car features (methods) such as start car, stop car, accelerate and decelerate.
- * The interface "Moveble" is also implemented which requires the implementation of various methods to move the car.
+ * The interface "Movable" is also implemented which requires the implementation of various methods to move the car.
  */
 public abstract class Car implements Movable {
 
@@ -15,17 +19,27 @@ public abstract class Car implements Movable {
     protected double currentSpeed; // The current speed of the car
     private Color color; // Color of the car
     private final String modelName; // The car model name
+    protected WeightClass weightClass; // The weight class of the car. Is defined by an enum
 
     private Direction direction; // The current direction of the
     private Vector position;
 
-    public Car(int nrDoors, Color color, int enginePower, String modelName) {
+    /**
+     * Constructor
+     * @param nrDoors Number of doors.
+     * @param color Color of the vehicle.
+     * @param enginePower The engine power.
+     * @param modelName The vehicles model name.
+     * @param weightClass The vehicles weight class
+     */
+    public Car(int nrDoors, Color color, int enginePower, String modelName, WeightClass weightClass) {
         this.nrDoors = nrDoors;
         this.color = color;
         this.enginePower = enginePower;
         this.modelName = modelName;
         this.position = Vector.zero();
         this.direction = Direction.NORTH;
+        this.weightClass = weightClass;
 
         stopEngine();
     }
@@ -104,6 +118,9 @@ public abstract class Car implements Movable {
      * @param amount Amount to increment.
      */
     private void incrementSpeed(double amount){
+        if(currentSpeed == 0)
+            return;
+
         currentSpeed = Math.min(getCurrentSpeed() + speedFactor() * amount,enginePower);
     }
 
@@ -114,6 +131,14 @@ public abstract class Car implements Movable {
      */
     private void decrementSpeed(double amount){
         currentSpeed = Math.max(getCurrentSpeed() - speedFactor() * amount,0);
+    }
+
+    /**
+     * Test if speed is 0
+     * @return true if vehicle is stationary, else false
+     */
+    public boolean vehicleIsStationary() {
+        return currentSpeed == 0;
     }
 
     /**
@@ -154,7 +179,16 @@ public abstract class Car implements Movable {
         return position;
     }
 
+    public void setPosition(Vector position) {
+        this.position = position;
+    }
+
     public String getModelName() {
         return modelName;
     }
+
+    public WeightClass getWeightClass() {
+        return weightClass;
+    }
+
 }

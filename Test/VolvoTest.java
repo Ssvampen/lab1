@@ -2,7 +2,7 @@ package Test;
 
 import org.junit.Before;
 import org.junit.Test;
-import src.Vector;
+import src.util.Vector;
 import src.Volvo240;
 
 

@@ -1,4 +1,4 @@
-package src;
+package src.util;
 
 /**
  * Represents an immutable 2D vector.
@@ -51,6 +51,15 @@ public class Vector {
         return new Vector(getX() * vector.getX(), getY() * vector.getY());
     }
 
+    /**
+     * Calculates the Euclidean distance between the two vectors.
+     * @param other Other vector to calculate distance to.
+     * @return Distance between the two vectors.
+     */
+    public double distance(Vector other) {
+        return Math.sqrt(Math.pow(getX() - other.getX(), 2) + Math.pow(getY() - other.getY(), 2));
+    }
+
 
     /**
      * Checks if this Vector is equal to another.
@@ -68,4 +77,8 @@ public class Vector {
         return super.equals(obj);
     }
 
+    @Override
+    public String toString() {
+        return "(" + getX() + "," + getY() + ")";
+    }
 }

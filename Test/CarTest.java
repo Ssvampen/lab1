@@ -4,7 +4,7 @@ import org.junit.Before;
 import org.junit.Test;
 import java.awt.Color;
 import src.Car;
-import src.Direction;
+import src.util.Direction;
 import src.Volvo240;
 
 import static org.junit.Assert.*;
@@ -76,14 +76,19 @@ public class CarTest {
     public void testSetGasWithAmountAbove1Fails() {
         car.startEngine();
         car.gas(2.0);
-        assertEquals(car.getCurrentSpeed(), 0.1);
+        assertEquals(car.getCurrentSpeed(), 0.1, 0.0001);
     }
 
     @Test
     public void testSetBrakeWithAmountAbove1Fails() {
         car.startEngine();
         car.brake(2.0);
-        assertEquals(car.getCurrentSpeed(), 0.1);
+        assertEquals(car.getCurrentSpeed(), 0.1, 0.0001);
+    }
+
+    @Test
+    public void testCarIsStationary(){
+        assertTrue(car.vehicleIsStationary());
     }
 
     @Test
