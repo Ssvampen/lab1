@@ -38,6 +38,9 @@ public class CarView extends JFrame{
     JButton liftBedButton = new JButton("Scania Lift Bed");
     JButton lowerBedButton = new JButton("Lower Lift Bed");
 
+    JButton turnLeftButton = new JButton("Turn Left");
+    JButton turnRightButton = new JButton("Turn Right");
+
     JButton startButton = new JButton("Start all cars");
     JButton stopButton = new JButton("Stop all cars");
 
@@ -85,6 +88,8 @@ public class CarView extends JFrame{
         controlPanel.add(brakeButton, 3);
         controlPanel.add(turboOffButton, 4);
         controlPanel.add(lowerBedButton, 5);
+        controlPanel.add(turnLeftButton, 6);
+        controlPanel.add(turnRightButton, 7);
         controlPanel.setPreferredSize(new Dimension((X/2)+4, 200));
         this.add(controlPanel);
         controlPanel.setBackground(Color.CYAN);
@@ -109,6 +114,16 @@ public class CarView extends JFrame{
                 carC.gas(gasAmount);
             }
         });
+        brakeButton.addActionListener(e -> carC.brake(gasAmount));
+        turboOnButton.addActionListener(e -> carC.turboOn());
+        turboOffButton.addActionListener(e -> carC.turboOff());
+        liftBedButton.addActionListener(e -> carC.liftBed(gasAmount));
+        lowerBedButton.addActionListener(e -> carC.lowerBed(gasAmount));
+        stopButton.addActionListener(e -> carC.stop());
+        startButton.addActionListener(e -> carC.start());
+
+        turnLeftButton.addActionListener(e -> carC.turnLeft());
+        turnRightButton.addActionListener(e -> carC.turnRight());
 
         // Make the frame pack all it's components by respecting the sizes if possible.
         this.pack();

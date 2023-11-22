@@ -16,7 +16,7 @@ public class Scania extends Truck {
      * @param loadingPlatform Loading platform to put on this Scania.
      */
     public Scania(LoadingPlatform loadingPlatform){
-        super(2, Color.BLUE, 200, "Scania 1337", loadingPlatform);
+        super(2, Color.BLUE, 50, "Scania_1337", loadingPlatform);
         this.loadingPlatform = loadingPlatform;
     }
 

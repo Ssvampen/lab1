@@ -60,6 +60,14 @@ public class Vector {
         return Math.sqrt(Math.pow(getX() - other.getX(), 2) + Math.pow(getY() - other.getY(), 2));
     }
 
+    /**
+     * Inverts both the x and the y on the vector. It multiplies it with (-1)
+     * @return A new inverted vector
+     */
+    public Vector invert() {
+        return new Vector(x * (-1), y * (-1));
+    }
+
 
     /**
      * Checks if this Vector is equal to another.

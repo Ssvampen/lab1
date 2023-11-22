@@ -5,41 +5,54 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
+import java.io.InputStream;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 // This panel represent the animated part of the view with the car images.
 
 public class DrawPanel extends JPanel{
 
-    // Just a single image, TODO: Generalize
-    BufferedImage volvoImage;
-    // To keep track of a singel cars position
-    Point volvoPoint = new Point();
-
-    // TODO: Make this genereal for all cars
-    void moveit(int x, int y){
-        volvoPoint.x = x;
-        volvoPoint.y = y;
-    }
+    private final Map<String, BufferedImage> loadedImages = new HashMap<>();
+    private final List<RenderObject> renderObjects = new ArrayList<>();
 
     // Initializes the panel and reads the images
     public DrawPanel(int x, int y) {
         this.setDoubleBuffered(true);
         this.setPreferredSize(new Dimension(x, y));
         this.setBackground(Color.green);
-        // Print an error message in case file is not found with a try/catch block
+    }
+
+    // Does not return the true panel width
+    public int getWidth(){
+        return this.getSize().width;
+
+    }
+
+    // Does not return the true panel height
+    public int getHeight(){
+        return this.getSize().height;
+    }
+
+    public void loadImage(String name){
         try {
-            // You can remove the "pics" part if running outside of IntelliJ and
-            // everything is in the same main folder.
-            // volvoImage = ImageIO.read(new File("Volvo240.jpg"));
+            InputStream stream = DrawPanel.class.getResourceAsStream("../pics/" + name + ".jpg");
+            if(stream == null)
+                return;
 
-            // Rememember to rightclick src New -> Package -> name: pics -> MOVE *.jpg to pics.
-            // if you are starting in IntelliJ.
-            volvoImage = ImageIO.read(DrawPanel.class.getResourceAsStream("pics/Volvo240.jpg"));
-        } catch (IOException ex)
-        {
-            ex.printStackTrace();
+            this.loadedImages.put(name, ImageIO.read(stream));
+        } catch (IOException e) {
+            throw new RuntimeException(e);
         }
+    }
 
+
+    public RenderObject addRenderObject(String imageName, Point position){
+        RenderObject newRenderObject = new RenderObject(position, loadedImages.get(imageName));
+        renderObjects.add(newRenderObject);
+        return newRenderObject;
     }
 
     // This method is called each time the panel updates/refreshes/repaints itself
@@ -47,6 +60,8 @@ public class DrawPanel extends JPanel{
     @Override
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
-        g.drawImage(volvoImage, volvoPoint.x, volvoPoint.y, null); // see javadoc for more info on the parameters
+        for(RenderObject object : this.renderObjects){
+            g.drawImage(object.getImage(), object.getPosition().x, object.getPosition().y, null);
+        }
     }
 }
