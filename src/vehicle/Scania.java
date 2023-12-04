@@ -1,4 +1,6 @@
-package src;
+package src.vehicle;
+
+import src.hingeable.LoadingPlatform;
 
 import java.awt.*;
 
@@ -45,7 +47,7 @@ public class Scania extends Truck {
 
     @Override
     public double speedFactor() {
-        return enginePower * 0.01;
+        return getEnginePower() * 0.01;
     }
 
 

@@ -1,28 +1,28 @@
-package src;
+package src.vehicle;
 
-import src.util.Direction;
+import src.Movable;
 import src.util.Vector;
 import src.util.WeightClass;
 
 import java.awt.*;
 
 /**
- * Car is a class with the basic car attributes and methods that apply to most modern cars.
+ * Car is a class with the basic vehicle attributes and methods that apply to most modern vehicles.
  * Car has attributes within the likes of number of doors, engine power, model name, and so on.
- * The Car class also implements the basic car features (methods) such as start car, stop car, accelerate and decelerate.
- * The interface "Movable" is also implemented which requires the implementation of various methods to move the car.
+ * The Car class also implements the basic vehicle features (methods) such as start vehicle, stop vehicle, accelerate and decelerate.
+ * The interface "Movable" is also implemented which requires the implementation of various methods to move the vehicle.
  */
-public abstract class Car implements Movable {
+public abstract class Vehicle implements Movable {
 
-    private final int nrDoors; // Number of doors on the car
-    protected double enginePower; // Engine power of the car
-    protected double currentSpeed; // The current speed of the car
-    private Color color; // Color of the car
-    private final String modelName; // The car model name
-    protected WeightClass weightClass; // The weight class of the car. Is defined by an enum
+    private final int nrDoors; // Number of doors on the vehicle
+    protected double enginePower; // Engine power of the vehicle
+    protected double currentSpeed; // The current speed of the vehicle
+    private Color color; // Color of the vehicle
+    private final String modelName; // The vehicle model name
+    protected WeightClass weightClass; // The weight class of the vehicle. Is defined by an enum
 
-    private Direction direction; // The current direction of the
-    private Vector position;
+    private Vector direction; // The current direction of the vehicle
+    private Vector position; // The current position of the vehicle
 
     /**
      * Constructor
@@ -32,13 +32,13 @@ public abstract class Car implements Movable {
      * @param modelName The vehicles model name.
      * @param weightClass The vehicles weight class
      */
-    public Car(int nrDoors, Color color, int enginePower, String modelName, WeightClass weightClass) {
+    public Vehicle(int nrDoors, Color color, int enginePower, String modelName, WeightClass weightClass) {
         this.nrDoors = nrDoors;
         this.color = color;
         this.enginePower = enginePower;
         this.modelName = modelName;
         this.position = Vector.zero();
-        this.direction = Direction.NORTH;
+        this.direction = Vector.NORTH;
         this.weightClass = weightClass;
 
         stopEngine();
@@ -65,14 +65,14 @@ public abstract class Car implements Movable {
     }
 
     /**
-     * Sets the cars current speed to 0.1.
+     * Sets the vehicles current speed to 0.1.
      */
     public void startEngine(){
         currentSpeed = 0.1;
     }
 
     /**
-     * Sets the cars current speed to 0.
+     * Sets the vehicles current speed to 0.
      */
     public void stopEngine() {
         currentSpeed = 0;
@@ -100,7 +100,7 @@ public abstract class Car implements Movable {
     }
 
     /**
-     * Decreases the cars speed using the formula in the decrementSpeed() method.
+     * Decreases the vehicles speed using the formula in the decrementSpeed() method.
      * Should be within range [0, 1].
      * @param amount Inputted breakage.
      */
@@ -113,8 +113,8 @@ public abstract class Car implements Movable {
     }
 
     /**
-     * Increments the speed of the car with the specified amount.
-     * This can never exceed the engine power of the car.
+     * Increments the speed of the vehicle with the specified amount.
+     * This can never exceed the engine power of the vehicle.
      * @param amount Amount to increment.
      */
     private void incrementSpeed(double amount){
@@ -125,7 +125,7 @@ public abstract class Car implements Movable {
     }
 
     /**
-     * Decrements the speed of the car with the specified amount.
+     * Decrements the speed of the vehicle with the specified amount.
      * This can never go below 0.
      * @param amount Amount to decrement.
      */
@@ -142,36 +142,32 @@ public abstract class Car implements Movable {
     }
 
     /**
-     * Speed factor of this car, how much it should accelerate.
+     * Speed factor of this vehicle, how much it should accelerate.
      */
     public abstract double speedFactor();
 
     /**
-     * Moves the car in the current direction with the current speed.
+     * Moves the vehicle in the current direction with the current speed.
      */
     public void move() {
-        this.position = this.position.add(direction.getVector().multiply(new Vector(currentSpeed, currentSpeed)));
+        setPosition(this.position.add(direction.multiply(new Vector(currentSpeed, currentSpeed))));
     }
 
     /**
-     * Turns the car 90 degrees right.
+     * Turns the vehicle 90 degrees right.
      */
     public void turnRight() {
-        int index = (this.direction.getIndex() - 1);
-        if(index < 0){index = 3;}
-        this.direction = Direction.fromIndex(index);
+        setDirection(this.direction.rotate(Math.PI / 2));
     }
 
     /**
-     * Turns the car 90 degrees left.
+     * Turns the vehicle 90 degrees left.
      */
     public void turnLeft() {
-        int index = (this.direction.getIndex() + 1);
-        if(index > 3){index = 0;}
-        this.direction = Direction.fromIndex(index);
+        setDirection(this.direction.rotate(-Math.PI / 2));
     }
 
-    public Direction getDirection() {
+    public Vector getDirection() {
         return direction;
     }
 
@@ -181,6 +177,11 @@ public abstract class Car implements Movable {
 
     public void setPosition(Vector position) {
         this.position = position;
+    }
+
+    @Override
+    public void setDirection(Vector direction) {
+        this.direction = direction;
     }
 
     public String getModelName() {

@@ -7,6 +7,11 @@ public class Vector {
     private final double x;
     private final double y;
 
+    public static Vector NORTH = new Vector(0, 1);
+    public static Vector SOUTH = new Vector(0, -1);
+    public static Vector EAST = new Vector(1, 0);
+    public static Vector WEST = new Vector(-1, 0);
+
     /**
      * Constructs a new vector.
      * @param x X component of the vector.
@@ -52,11 +57,22 @@ public class Vector {
     }
 
     /**
+     * Rotate a vector clockwise around its center
+     * @param radians Radians to rotate
+     * @return Rotated vector
+     */
+    public Vector rotate(double radians){
+        double xRotated = x * Math.cos(-radians) - y * Math.sin(-radians);
+        double yRotated = x * Math.sin(-radians) + y * Math.cos(-radians);
+        return new Vector(xRotated, yRotated);
+    }
+
+    /**
      * Calculates the Euclidean distance between the two vectors.
      * @param other Other vector to calculate distance to.
      * @return Distance between the two vectors.
      */
-    public double distance(Vector other) {
+    public double calculateDistanceTo(Vector other) {
         return Math.sqrt(Math.pow(getX() - other.getX(), 2) + Math.pow(getY() - other.getY(), 2));
     }
 

@@ -1,10 +1,10 @@
-package src;
+package src.vehicle;
 
 import java.awt.*;
 
 import src.util.WeightClass;
 
-public class Volvo240 extends Car{
+public class Volvo240 extends Vehicle {
     public final static double trimFactor = 1.25;
 
     public Volvo240(){

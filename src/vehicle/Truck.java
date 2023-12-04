@@ -1,6 +1,8 @@
-package src;
+package src.vehicle;
 
+import src.hingeable.Hingeable;
 import src.util.WeightClass;
+import src.vehicle.Vehicle;
 
 import java.awt.*;
 
@@ -8,9 +10,9 @@ import java.awt.*;
  * The truck class is a vehicle (Car) that is expected to have a carrige.
  */
 
-public abstract class Truck extends Car implements Hinged {
+public abstract class Truck extends Vehicle implements Hingeable {
 
-    private final Hinged hinged;
+    private final Hingeable hingeable;
 
     /**
      * Constructor
@@ -19,11 +21,11 @@ public abstract class Truck extends Car implements Hinged {
      * @param color Color of the vehicle.
      * @param enginePower The engine power.
      * @param modelName The vehicles model name.
-     * @param hinged The vehicles carrige (e.g. a ramp).
+     * @param hingeable The vehicles carrige (e.g. a ramp).
      */
-    public Truck(int nrDoors, Color color, int enginePower, String modelName, Hinged hinged) {
+    public Truck(int nrDoors, Color color, int enginePower, String modelName, Hingeable hingeable) {
         super(nrDoors, color, enginePower, modelName, WeightClass.HUMONGOUS);
-        this.hinged = hinged;
+        this.hingeable = hingeable;
     }
 
     /**
@@ -32,7 +34,7 @@ public abstract class Truck extends Car implements Hinged {
      */
     @Override
     public void startEngine() {
-        if(hinged.attacheableIsDown())
+        if(hingeable.attacheableIsDown())
             return;
 
         super.startEngine();
@@ -40,7 +42,7 @@ public abstract class Truck extends Car implements Hinged {
 
     @Override
     public boolean attacheableIsDown() {
-        return hinged.attacheableIsDown();
+        return hingeable.attacheableIsDown();
     }
 
 }

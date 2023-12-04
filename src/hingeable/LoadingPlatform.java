@@ -1,9 +1,9 @@
-package src;
+package src.hingeable;
 
 /**
  * A loading platform is a carrige that can lower and raise itself. It has a "floating" sate; it can be raised to an angle. The loading platform does not have any loading capabilities.
  */
-public class LoadingPlatform implements Hinged {
+public class LoadingPlatform implements Hingeable {
 
     private double angle = 0;
 

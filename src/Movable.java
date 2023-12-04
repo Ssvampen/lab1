@@ -1,9 +1,10 @@
 package src;
 
+import src.Entity;
 /**
  * Represents an entity that can move and turn in both directions.
  */
-public interface Movable {
+public interface Movable extends Entity{
 
     /**
      * Moves the entity forward.

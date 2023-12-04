@@ -1,4 +1,4 @@
-package src;
+package src.hingeable;
 
 /**
  * Represents an entity which has a car ramp on it.
@@ -19,5 +19,5 @@ public interface Rampable {
      * @return Amount of cars
      */
 
-    int getCarCount();
+    int getEntityCount();
 }
