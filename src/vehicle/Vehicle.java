@@ -15,11 +15,11 @@ import java.awt.*;
 public abstract class Vehicle implements Movable {
 
     private final int nrDoors; // Number of doors on the vehicle
-    protected double enginePower; // Engine power of the vehicle
-    protected double currentSpeed; // The current speed of the vehicle
     private Color color; // Color of the vehicle
     private final String modelName; // The vehicle model name
     protected WeightClass weightClass; // The weight class of the vehicle. Is defined by an enum
+
+    private final Engine engine;
 
     private Vector direction; // The current direction of the vehicle
     private Vector position; // The current position of the vehicle
@@ -35,12 +35,12 @@ public abstract class Vehicle implements Movable {
     public Vehicle(int nrDoors, Color color, int enginePower, String modelName, WeightClass weightClass) {
         this.nrDoors = nrDoors;
         this.color = color;
-        this.enginePower = enginePower;
         this.modelName = modelName;
         this.position = Vector.zero();
         this.direction = Vector.NORTH;
         this.weightClass = weightClass;
 
+        this.engine = new Engine(enginePower);
         stopEngine();
     }
 
@@ -49,11 +49,11 @@ public abstract class Vehicle implements Movable {
     }
 
     public double getEnginePower(){
-        return enginePower;
+        return engine.getPower();
     }
 
     public double getCurrentSpeed(){
-        return currentSpeed;
+        return engine.currentSpeed;
     }
 
     public Color getColor(){
@@ -64,81 +64,21 @@ public abstract class Vehicle implements Movable {
         color = clr;
     }
 
-    /**
-     * Sets the vehicles current speed to 0.1.
-     */
+
     public void startEngine(){
-        currentSpeed = 0.1;
+        engine.start();
     }
 
-    /**
-     * Sets the vehicles current speed to 0.
-     */
     public void stopEngine() {
-        currentSpeed = 0;
+        engine.stop();
     }
 
-    /**
-     * @param amount Inputted acceleration.
-     * @return True if the speed is not within the range [0,1].
-     */
-    private static boolean isSpeedOutsideMovementRange(double amount){
-        return amount < 0.0 || amount > 1.0;
-    }
-
-    /**
-     * Increments the speed using the formula used in the incrementSpeed() method.
-     * Should be within range [0, 1].
-     * @param amount Inputted acceleration.
-     */
     public void gas(double amount){
-        if(isSpeedOutsideMovementRange(amount)) {
-            return;
-        }
-
-        incrementSpeed(amount);
+        engine.gas(amount, speedFactor());
     }
 
-    /**
-     * Decreases the vehicles speed using the formula in the decrementSpeed() method.
-     * Should be within range [0, 1].
-     * @param amount Inputted breakage.
-     */
     public void brake(double amount){
-        if(isSpeedOutsideMovementRange(amount)) {
-            return;
-        }
-
-        decrementSpeed(amount);
-    }
-
-    /**
-     * Increments the speed of the vehicle with the specified amount.
-     * This can never exceed the engine power of the vehicle.
-     * @param amount Amount to increment.
-     */
-    private void incrementSpeed(double amount){
-        if(currentSpeed == 0)
-            return;
-
-        currentSpeed = Math.min(getCurrentSpeed() + speedFactor() * amount,enginePower);
-    }
-
-    /**
-     * Decrements the speed of the vehicle with the specified amount.
-     * This can never go below 0.
-     * @param amount Amount to decrement.
-     */
-    private void decrementSpeed(double amount){
-        currentSpeed = Math.max(getCurrentSpeed() - speedFactor() * amount,0);
-    }
-
-    /**
-     * Test if speed is 0
-     * @return true if vehicle is stationary, else false
-     */
-    public boolean vehicleIsStationary() {
-        return currentSpeed == 0;
+        engine.brake(amount, speedFactor());
     }
 
     /**
@@ -150,7 +90,17 @@ public abstract class Vehicle implements Movable {
      * Moves the vehicle in the current direction with the current speed.
      */
     public void move() {
-        setPosition(this.position.add(direction.multiply(new Vector(currentSpeed, currentSpeed))));
+        Vector speedVector = new Vector(engine.getCurrentSpeed(), engine.getCurrentSpeed());
+        Vector displacement = direction.multiply(speedVector);
+        setPosition(this.position.add(displacement));
+    }
+
+    /**
+     * Test if speed is 0
+     * @return true if vehicle is stationary, else false
+     */
+    public boolean vehicleIsStationary() {
+        return engine.isStationary();
     }
 
     /**

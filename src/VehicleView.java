@@ -89,4 +89,24 @@ public class VehicleView extends JFrame{
         // Make sure the frame exits when "x" is pressed
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     }
+
+    public void loadImage(String name){
+        this.drawPanel.loadImage(name);
+    }
+
+    public int getWidth(){
+        return this.drawPanel.getWidth();
+    }
+
+    public int getHeight(){
+        return this.drawPanel.getHeight();
+    }
+
+    public RenderObject addRenderObject(String imageName, Point position){
+        return this.drawPanel.addRenderObject(imageName, position);
+    }
+
+    public void repaint(){
+        this.drawPanel.repaint();
+    }
 }

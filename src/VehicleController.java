@@ -46,15 +46,17 @@ public class VehicleController {
     public void loadImages(){
         // Load images here
         for(String model : supportedModels) {
-            frame.drawPanel.loadImage(model); // TODO: law of demeter!!!!!!!!!!!!!!
+            frame.loadImage(model); // TODO: law of demeter!!!!!!!!!!!!!!
         }
     }
 
     //methods:
     public void addVehicle(Vehicle vehicle){
         this.vehicles.add(vehicle);
-        RenderObject object = this.frame.drawPanel.addRenderObject(vehicle.getModelName(),
-                new Point((int) Math.round(vehicle.getPosition().getX()), (int) Math.round(vehicle.getPosition().getY())));
+        RenderObject object = this.frame.addRenderObject(vehicle.getModelName(),
+                new Point((int) Math.round(vehicle.getPosition().getX()),
+                        (int) Math.round(vehicle.getPosition().getY())));
+
         this.renderObjects.put(vehicle, object);
     }
 
@@ -79,7 +81,7 @@ public class VehicleController {
 
                 vehicle.move();
             }
-            frame.drawPanel.repaint();
+            frame.repaint();
         }
     }
 
@@ -92,8 +94,8 @@ public class VehicleController {
         double y = vehicle.getPosition().getY();
         int errorFixHeight = 55;
         int errorFixWidth = 100;
-        boolean outsideX = x < 0 || x > frame.drawPanel.getWidth() - errorFixWidth;
-        boolean outsideY =  y < 0 || y > frame.drawPanel.getHeight() - errorFixHeight;
+        boolean outsideX = x < 0 || x > frame.getWidth() - errorFixWidth;
+        boolean outsideY =  y < 0 || y > frame.getHeight() - errorFixHeight;
         // Make vehicle turn if it is outside bounds
         // The true panel size is not used, hence the errorFix integer. TODO: Search for better solution
         if(outsideX || outsideY) {
@@ -101,8 +103,8 @@ public class VehicleController {
             vehicle.turnRight();
             vehicle.turnRight();
             vehicle.startEngine();
-            x = Math.min(Math.max(0,x),frame.drawPanel.getWidth()-errorFixWidth);
-            y = Math.min(Math.max(0,y),frame.drawPanel.getHeight()-errorFixHeight);
+            x = Math.min(Math.max(0,x),frame.getWidth()-errorFixWidth);
+            y = Math.min(Math.max(0,y),frame.getHeight()-errorFixHeight);
         }
 
         vehicle.setPosition(new Vector(x, y));
