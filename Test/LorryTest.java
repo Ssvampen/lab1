@@ -2,8 +2,10 @@ package Test;
 
 import org.junit.Before;
 import org.junit.Test;
-import src.*;
+import src.hingeable.Ramp;
 import src.util.Vector;
+import src.vehicle.Lorry;
+import src.vehicle.Volvo240;
 
 import static org.junit.Assert.*;
 
@@ -25,13 +27,13 @@ public class LorryTest {
     }
 
     @Test
-    public void testAddCarNearLorryToLorrysRamp() {
-        Volvo240 car = new Volvo240();
-        car.setPosition(new Vector(1,1));
+    public void testAddEntityNearLorryToLorrysRamp() {
+        Volvo240 entity = new Volvo240();
+        entity.setPosition(new Vector(1,1));
         lorry.lowerRamp();
         lorry.setPosition(new Vector(1,1));
-        lorry.addCar(car);
-        assertEquals(1, lorry.getCarCount());
+        lorry.addEntity(entity);
+        assertEquals(1, lorry.getEntityCount());
     }
 
     @Test
@@ -40,10 +42,10 @@ public class LorryTest {
     }
 
     @Test
-    public void testCannotAddCarWithRampUp(){
-       lorry.raiseRamp();
-       lorry.addCar(new Volvo240());
-       assertEquals(0, lorry.getCarCount());
+    public void testCannotAddEntityWithRampUp(){
+        lorry.raiseRamp();
+        lorry.addEntity(new Volvo240());
+        assertEquals(0, lorry.getEntityCount());
     }
 
     @Test
@@ -58,13 +60,13 @@ public class LorryTest {
 
 
     @Test
-    public void testRemoveCarSetsCorrectPosition(){
-        Volvo240 car = new Volvo240();
-        Volvo240 car2 = new Volvo240();
+    public void testRemoveEntitySetsCorrectPosition(){
+        Volvo240 entity = new Volvo240();
+        Volvo240 entity2 = new Volvo240();
 
         lorry.lowerRamp();
-        lorry.addCar(car);
-        lorry.addCar(car2);
+        lorry.addEntity(entity);
+        lorry.addEntity(entity2);
         lorry.raiseRamp();
         lorry.startEngine();
         lorry.turnLeft();
@@ -73,21 +75,21 @@ public class LorryTest {
         lorry.move(); // Position: (-0.2, 0.0)
         lorry.stopEngine();
         lorry.lowerRamp();
-        lorry.removeCar();
-        lorry.removeCar();
+        lorry.removeVehicle();
+        lorry.removeVehicle();
 
-        assertEquals(new Vector(-0.2 +  2.0, 0.0), car.getPosition());
-        assertEquals(new Vector(-0.2 +  4.0, 0.0), car2.getPosition());
+        assertEquals(new Vector(-0.2 +  2.0, 0.0), entity.getPosition());
+        assertEquals(new Vector(-0.2 +  4.0, 0.0), entity2.getPosition());
     }
 
     @Test
-    public void testRampKeepsCarsAtLorryPosition(){
-        Volvo240 car = new Volvo240();
-        lorry.addCar(car);
+    public void testRampKeepsEntitysAtLorryPosition(){
+        Volvo240 entity = new Volvo240();
+        lorry.addEntity(entity);
         lorry.startEngine();
         lorry.move();
         lorry.move();
-        assertEquals(lorry.getPosition(), car.getPosition());
+        assertEquals(lorry.getPosition(), entity.getPosition());
     }
 
 

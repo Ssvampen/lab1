@@ -1,24 +1,23 @@
 package Test;
 
-import src.Lorry;
-import src.Ramp;
+import src.vehicle.Lorry;
+import src.hingeable.Ramp;
 
 import static org.junit.Assert.*;
 
 import org.junit.Before;
 import org.junit.Test;
-import src.Volvo240;
-import src.util.Direction;
+import src.vehicle.Volvo240;
 
 
 public class RampTest {
     private Ramp ramp;
-    private int maxCars;
+    private int maxEntitys;
 
     @Before
     public void RampInitializer(){
-        maxCars = 5;
-        ramp = new Ramp(maxCars);
+        maxEntitys = 5;
+        ramp = new Ramp(maxEntitys);
     }
 
     @Test
@@ -35,27 +34,27 @@ public class RampTest {
     }
 
     @Test
-    public void testAddTwoCarsCount2(){
-        ramp.addCar(new Volvo240());
-        ramp.addCar(new Volvo240());
-        assertEquals(2, ramp.getCarCount());
+    public void testAddTwoEntitysCount2(){
+        ramp.addEntity(new Volvo240());
+        ramp.addEntity(new Volvo240());
+        assertEquals(2, ramp.getEntityCount());
     }
 
 
     @Test
-    public void testAddAndRemoveCarCount0(){
-        Volvo240 car = new Volvo240();
+    public void testAddAndRemoveEntityCount0(){
+        Volvo240 entity = new Volvo240();
         ramp.lowerRamp();
-        ramp.addCar(car);
-        ramp.removeCar(Direction.NORTH);
-        assertEquals(0, ramp.getCarCount());
+        ramp.addEntity(entity);
+        ramp.removeEntity();
+        assertEquals(0, ramp.getEntityCount());
     }
 
     @Test
-    public void testCannotAddRampedCar(){
+    public void testCannotAddRampedEntity(){
         Lorry lorry = new Lorry(new Ramp(10));
-        ramp.addCar(lorry);
-        assertEquals(0, lorry.getCarCount());
+        ramp.addEntity(lorry);
+        assertEquals(0, lorry.getEntityCount());
     }
 
 }

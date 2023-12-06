@@ -3,6 +3,7 @@ package src.vehicle;
 import src.Movable;
 import src.util.Vector;
 import src.util.WeightClass;
+import src.Turboable;
 
 import java.awt.*;
 
@@ -141,5 +142,4 @@ public abstract class Vehicle implements Movable {
     public WeightClass getWeightClass() {
         return weightClass;
     }
-
 }

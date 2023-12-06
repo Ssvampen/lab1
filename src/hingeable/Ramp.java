@@ -79,12 +79,6 @@ public class Ramp implements Hingeable, Rampable, Entity {
     /**
      * Moves all entities (independent of every individual entities enginepower...) to the same position of the parent entity
      */
-    public void teleportEntitys() {
-        for(Entity entity: entities){
-            entity.setDirection(direction);
-            entity.setPosition(position);
-        }
-    }
 
     @Override
     public void raiseRamp(){
@@ -115,6 +109,9 @@ public class Ramp implements Hingeable, Rampable, Entity {
     @Override
     public void setPosition(Vector position) {
         this.position = position;
+        for(Entity entity: entities){
+            entity.setPosition(position);
+        }
     }
 
     @Override
@@ -125,6 +122,9 @@ public class Ramp implements Hingeable, Rampable, Entity {
     @Override
     public void setDirection(Vector direction) {
         this.direction = direction;
+        for(Entity entity: entities){
+            entity.setDirection(direction);
+        }
     }
 
     @Override

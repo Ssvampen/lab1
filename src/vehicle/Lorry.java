@@ -37,7 +37,7 @@ public class Lorry extends Truck implements Rampable {
     @Override
     public void move() {
         super.move();
-        this.ramp.teleportEntitys();
+        this.ramp.setPosition(getPosition());
     }
 
     @Override

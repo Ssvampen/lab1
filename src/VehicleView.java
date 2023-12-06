@@ -1,13 +1,7 @@
 package src;
 
 import javax.swing.*;
-import javax.swing.event.ChangeEvent;
-import javax.swing.event.ChangeListener;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-
-import src.ControlPanel;
 
 /**
  * This class represents the full view of the MVC pattern of your vehicle simulator.
@@ -18,10 +12,6 @@ import src.ControlPanel;
  **/
 
 public class VehicleView extends JFrame{
-
-    // The controller member
-    private final VehicleController vehicleC;
-
     final DrawPanel drawPanel;
 
     private final ControlPanel controlPanel = new ControlPanel();
@@ -35,8 +25,7 @@ public class VehicleView extends JFrame{
     private final int y;
 
     // Constructor
-    public VehicleView(String framename, VehicleController cc, int x, int y){
-        this.vehicleC = cc;
+    public VehicleView(String framename, VehicleController vehicleController, int x, int y){
         this.x = x;
         this.y = y;
         drawPanel = new DrawPanel(x, x-240);
@@ -56,9 +45,8 @@ public class VehicleView extends JFrame{
         gasPanel.initComponents();
         this.add(gasPanel);
 
-        controlPanel.initComponents(vehicleC, x, gasPanel.getGasAmount());
-        this.add(controlPanel);
-
+        vehicleController.initComponents();
+        //this.add(vehicleController);
 
         startButton.setBackground(Color.blue);
         startButton.setForeground(Color.green);
