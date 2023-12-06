@@ -1,13 +1,10 @@
 package Test;
 
 import src.ObjectStorage;
-import src.Volvo240;
+import src.vehicle.Volvo240;
 
 import org.junit.Test;
 import org.junit.Before;
-import src.Volvo240;
-
-import java.util.*;
 
 import static org.junit.Assert.assertEquals;
 
@@ -22,7 +19,7 @@ public class ObjectStorageTest {
     }
 
     @Test
-    public void testMaxCars(){
+    public void testMaxVehicles(){
         for(int i = 0; i < maxObjects+1; i++){
             storage.addObject(new Volvo240());
         }

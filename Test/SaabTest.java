@@ -2,8 +2,7 @@ package Test;
 
 import org.junit.Before;
 import org.junit.Test;
-import src.Saab95;
-import src.Volvo240;
+import src.vehicle.Saab95;
 
 import static org.junit.Assert.assertEquals;
 
@@ -12,7 +11,7 @@ public class SaabTest {
     Saab95 saab;
 
     @Before
-    public void CarInitzilizer() {
+    public void VehicleInitzilizer() {
         saab = new Saab95();
     }
 

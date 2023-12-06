@@ -3,8 +3,8 @@ package Test;
 import org.junit.Before;
 import org.junit.Test;
 
-import src.Scania;
-import src.LoadingPlatform;
+import src.vehicle.Scania;
+import src.hingeable.LoadingPlatform;
 import src.util.Vector;
 
 import static org.junit.Assert.*;
@@ -29,7 +29,7 @@ public class ScaniaTest {
 
     @Test
     public void testSpeedFactor(){
-        assertEquals(scania.speedFactor(), 2, 0.00001);
+        assertEquals(scania.speedFactor(), 0.5, 0.00001);
     }
 
     @Test

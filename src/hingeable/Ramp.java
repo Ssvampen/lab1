@@ -42,9 +42,8 @@ public class Ramp implements Hingeable, Rampable, Entity {
      * @param entity Entity to add
      */
     public void addEntity(Entity entity){
-        if(entity.getPosition().calculateDistanceTo(this.getPosition()) >= 1.0 || !attacheableIsDown()) {
+       if(!isEntityCloseEnough(entity) || !attacheableIsDown())
             return;
-        }
 
         // Can't add HUMONGOUS entities or ramped entities
         if(entity.getWeightClass() == WeightClass.HUMONGOUS || entity instanceof Rampable)
@@ -84,6 +83,10 @@ public class Ramp implements Hingeable, Rampable, Entity {
     public void raiseRamp(){
         isRaised = true;
         deleteUnloadedEntitysList();
+    }
+
+    private boolean isEntityCloseEnough(Entity entity){
+        return entity.getPosition().calculateDistanceTo(this.getPosition()) < 1.0;
     }
 
     @Override

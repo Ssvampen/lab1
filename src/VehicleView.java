@@ -20,26 +20,31 @@ public class VehicleView extends JFrame{
     private final int x;
     private final int y;
 
+    private final String framename;
+
+    private final VehicleController vehicleController;
+
     // Constructor
     public VehicleView(String framename, VehicleController vehicleController, int x, int y){
         this.x = x;
         this.y = y;
+        this.framename = framename;
         drawPanel = new DrawPanel(x, x-240);
-        initComponents(framename);
+        this.vehicleController = vehicleController;
     }
 
-    // Sets everything in place and fits everything
-    // TODO: Take a good look and make sure you understand how these methods and components work
-    private void initComponents(String title) {
+    public void initComponents() {
 
-        this.setTitle(title);
+System.out.println("inti view");
+        this.setTitle(framename);
         this.setPreferredSize(new Dimension(x, y));
         this.setLayout(new FlowLayout(FlowLayout.LEFT, 0, 0));
 
         this.add(drawPanel);
 
-        gasPanel.initComponents();
-        this.add(gasPanel);
+        GasController gasController = vehicleController.getGasController();
+        gasController.initComponents();
+        //this.add(gasController);
 
         vehicleController.initComponents();
         //this.add(vehicleController);
@@ -48,7 +53,6 @@ public class VehicleView extends JFrame{
         startButton.setForeground(Color.green);
         startButton.setPreferredSize(new Dimension(x / 5 - 15, 200));
         this.add(startButton);
-
 
         stopButton.setBackground(Color.red);
         stopButton.setForeground(Color.black);
