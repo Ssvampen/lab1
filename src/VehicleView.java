@@ -14,10 +14,6 @@ import java.awt.*;
 public class VehicleView extends JFrame{
     final DrawPanel drawPanel;
 
-    private final ControlPanel controlPanel = new ControlPanel();
-
-    private final GasPanel gasPanel = new GasPanel();
-
     private final JButton startButton = new JButton("Start all vehicles");
     private final JButton stopButton = new JButton("Stop all vehicles");
 
