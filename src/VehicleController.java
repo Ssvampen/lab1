@@ -14,6 +14,9 @@ public class VehicleController extends JPanel {
     private final JButton turnLeftButton = new JButton("Turn Left");
     private final JButton turnRightButton = new JButton("Turn Right");
 
+    private final JButton startButton = new JButton("Start all vehicles");
+    private final JButton stopButton = new JButton("Stop all vehicles");
+
     private final VehicleGroup group;
     private final GasController gasController;
     private final int width;
@@ -36,6 +39,20 @@ public class VehicleController extends JPanel {
         this.add(turnRightButton, 7);
         this.setPreferredSize(new Dimension((width/2)+4, 200));
         this.setBackground(Color.CYAN);
+
+
+        startButton.setBackground(Color.red);
+        startButton.setForeground(Color.green);
+        startButton.setPreferredSize(new Dimension(800/5-15,200));
+        startButton.addActionListener(e -> group.start());
+        this.add(startButton, 8);
+
+
+        stopButton.setBackground(Color.red);
+        stopButton.setForeground(Color.black);
+        stopButton.setPreferredSize(new Dimension(800/5-15,200));
+        stopButton.addActionListener(e -> group.stop());
+        this.add(stopButton, 9);
 
         gasButton.addActionListener(e -> group.gas(gasController.getGasAmount()));
         brakeButton.addActionListener(e -> group.brake(gasController.getGasAmount()));

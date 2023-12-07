@@ -12,19 +12,23 @@ import java.util.Map;
 public class Application implements VehicleMovementObserver {
 
     private final Map<Vehicle, RenderObject> renderObjects = new HashMap<>();
-    private final VehicleView view;
+    //private final VehicleView view;
     private final VehicleGroup group;
+
+    private VehicleView view;
 
     private Application(){
         int width = 800;
         int height = 800;
         group = new VehicleGroup(width, height);
-        view = new VehicleView("VehicleSim 1.0", new VehicleController(group, new GasController(), 400), width, height);
+        view = new VehicleView(new VehicleController(group, new GasController(), 800), 800, 800);
+        //view = new VehicleView("VehicleSim 1.0", new VehicleController(group, new GasController(), 400), width, height);
     }
 
     public void run(){
         view.initComponents();
         Arrays.asList("Saab95", "Scania_1337", "Volvo240").forEach(view::loadImage);
+
 
         Vehicle volvo = VehicleFactory.createNewVolvo240();
         volvo.setPosition(new Vector(0, 0));
@@ -38,6 +42,7 @@ public class Application implements VehicleMovementObserver {
         scania.setPosition(new Vector(0, 200));
         addVehicle(scania);
 
+        group.addVehicleMoveListener(this);
         // Start the timer
         group.startAnimation();
     }
@@ -52,7 +57,6 @@ public class Application implements VehicleMovementObserver {
         RenderObject object = view.addRenderObject(vehicle.getModelName(),
                 new Point((int) Math.round(vehicle.getPosition().getX()),
                         (int) Math.round(vehicle.getPosition().getY())));
-
         this.renderObjects.put(vehicle, object);
     }
     public void onVehicleMoved(Vehicle vehicle, Vector position){
