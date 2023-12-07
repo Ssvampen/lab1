@@ -48,7 +48,7 @@ public class VehicleMover implements ActionListener {
     private void bounceVehicleIfOutOfBounds(Vehicle vehicle) {
         double x = vehicle.getPosition().getX();
         double y = vehicle.getPosition().getY();
-        int errorFixHeight = 355;
+        int errorFixHeight = 55;
         int errorFixWidth = 100;
         boolean outsideX = x < 0 || x > width - errorFixWidth;
         boolean outsideY =  y < 0 || y > height - errorFixHeight;
