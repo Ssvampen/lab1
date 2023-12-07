@@ -1,5 +1,7 @@
 package src;
 
+import src.vehicle.Volvo240;
+
 import javax.swing.*;
 import java.awt.*;
 
@@ -16,6 +18,9 @@ public class VehicleController extends JPanel {
 
     private final JButton startButton = new JButton("Start all vehicles");
     private final JButton stopButton = new JButton("Stop all vehicles");
+
+    private final JButton addVehicleButton = new JButton("Add vehicle");
+    private final JButton removeVehicleButton = new JButton("Remove vehicle");
 
     private final VehicleGroup group;
     private final GasController gasController;
@@ -40,6 +45,12 @@ public class VehicleController extends JPanel {
         this.setPreferredSize(new Dimension((width/2)+4, 200));
         this.setBackground(Color.CYAN);
 
+        // Vehicle add/remove buttons
+        this.add(addVehicleButton);
+        this.add(removeVehicleButton);
+
+        addVehicleButton.addActionListener(e -> group.addVehicle(new Volvo240()));
+        removeVehicleButton.addActionListener(e -> group.removeVehicle());
 
         startButton.setBackground(Color.red);
         startButton.setForeground(Color.green);
