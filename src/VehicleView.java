@@ -54,4 +54,9 @@ public class VehicleView extends JFrame {
         return this.drawPanel.addRenderObject(imageName, position);
     }
 
+    public void removeRenderObject(RenderObject object){
+        this.drawPanel.removeRenderObject(object);
+        this.repaint();
+    }
+
 }

@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 import java.util.Vector;
+import java.util.concurrent.ThreadLocalRandom;
 import java.util.stream.Stream;
 
 public class VehicleGroup {
@@ -14,8 +15,11 @@ public class VehicleGroup {
     private final List<Vehicle> vehicles;
     private final VehicleMover vehicleMover;
 
+    private final List<VehicleAddRemoveObserver> observers;
+
     public VehicleGroup(int width, int height){
         this.vehicles = new ArrayList<>();
+        this.observers = new ArrayList<>();
         this.vehicleMover = new VehicleMover(vehicles,width,height);
     }
 
@@ -24,7 +28,33 @@ public class VehicleGroup {
     }
 
     public void addVehicle(Vehicle vehicle){
+        if(this.vehicles.size() >= 10)
+            return;
+
         this.vehicles.add(vehicle);
+        this.notifyAddListeners(vehicle);
+    }
+
+    public void removeVehicle(){
+        Vehicle vehicle = getRandomVehicle();
+        if(vehicle == null)
+            return;
+        this.vehicles.remove(vehicle);
+        notifyRemoveListeners(vehicle);
+    }
+
+    private void notifyAddListeners(Vehicle vehicle){
+        for(VehicleAddRemoveObserver observer : observers)
+            observer.onVehicleAdded(vehicle);
+    }
+
+    private void notifyRemoveListeners(Vehicle vehicle){
+        for(VehicleAddRemoveObserver observer : observers)
+            observer.onVehicleRemoved(vehicle);
+    }
+
+    public void addVehicleAddRemoveListener(VehicleAddRemoveObserver observer){
+        this.observers.add(observer);
     }
 
     public void addVehicleMoveListener(VehicleMovementObserver observer){
@@ -78,7 +108,13 @@ public class VehicleGroup {
     }
 
     private Vehicle getRandomVehicle(){
-        return vehicles.get(new Random().nextInt(vehicles.size()));
+        if(this.vehicles.isEmpty())
+            return null;
+
+        if(this.vehicles.size() == 1)
+            return this.vehicles.get(0);
+
+        return this.vehicles.get(ThreadLocalRandom.current().nextInt(this.vehicles.size() - 1));
     }
 
     public void turnRight(){

@@ -9,40 +9,39 @@ import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 
-public class Application implements VehicleMovementObserver {
+public class Application implements VehicleMovementObserver, VehicleAddRemoveObserver {
 
     private final Map<Vehicle, RenderObject> renderObjects = new HashMap<>();
-    //private final VehicleView view;
     private final VehicleGroup group;
-
-    private VehicleView view;
+    private final VehicleView view;
 
     private Application(){
         int width = 800;
         int height = 800;
         group = new VehicleGroup(width, height);
-        view = new VehicleView(new VehicleController(group, new GasController(), 800), 800, 800);
-        //view = new VehicleView("VehicleSim 1.0", new VehicleController(group, new GasController(), 400), width, height);
+        view = new VehicleView(new VehicleController(group, new GasController(), width), height, height);
     }
 
     public void run(){
         view.initComponents();
         Arrays.asList("Saab95", "Scania_1337", "Volvo240").forEach(view::loadImage);
 
+        group.addVehicleAddRemoveListener(this);
+        group.addVehicleMoveListener(this);
 
         Vehicle volvo = VehicleFactory.createNewVolvo240();
         volvo.setPosition(new Vector(0, 0));
-        addVehicle(volvo);
+        group.addVehicle(volvo);
 
         Vehicle saab = VehicleFactory.createNewSaab95();
         saab.setPosition(new Vector(0, 100));
-        addVehicle(saab);
+        group.addVehicle(saab);
 
         Vehicle scania = VehicleFactory.createNewScania(new LoadingPlatform());
         scania.setPosition(new Vector(0, 200));
-        addVehicle(scania);
+        group.addVehicle(scania);
 
-        group.addVehicleMoveListener(this);
+
         // Start the timer
         group.startAnimation();
     }
@@ -51,14 +50,6 @@ public class Application implements VehicleMovementObserver {
         new Application().run();
     }
 
-
-    private void addVehicle(Vehicle vehicle){
-        this.group.addVehicle(vehicle);
-        RenderObject object = view.addRenderObject(vehicle.getModelName(),
-                new Point((int) Math.round(vehicle.getPosition().getX()),
-                        (int) Math.round(vehicle.getPosition().getY())));
-        this.renderObjects.put(vehicle, object);
-    }
     public void onVehicleMoved(Vehicle vehicle, Vector position){
         RenderObject renderObject = renderObjects.get(vehicle);
         if(renderObject == null)
@@ -70,4 +61,23 @@ public class Application implements VehicleMovementObserver {
         renderObject.setPosition(point);
         this.view.repaint();
     }
+
+    @Override
+    public void onVehicleAdded(Vehicle vehicle) {
+        RenderObject object = view.addRenderObject(vehicle.getModelName(),
+                new Point((int) Math.round(vehicle.getPosition().getX()),
+                        (int) Math.round(vehicle.getPosition().getY())));
+
+        this.renderObjects.put(vehicle, object);
+    }
+
+    @Override
+    public void onVehicleRemoved(Vehicle vehicle) {
+        RenderObject object = this.renderObjects.get(vehicle);
+        if(object == null)
+            return;
+
+        view.removeRenderObject(object);
+    }
+
 }
