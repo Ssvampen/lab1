@@ -63,7 +63,7 @@ public class VehicleGroup {
     }
 
     public Vehicle addRandomVehicle(){
-        int randomIndex = ThreadLocalRandom.current().nextInt(VEHICLE_SUPPLIERS.size() + 1);
+        int randomIndex = ThreadLocalRandom.current().nextInt(VEHICLE_SUPPLIERS.size());
         return VEHICLE_SUPPLIERS.get(randomIndex).get();
     }
 
@@ -206,7 +206,7 @@ public class VehicleGroup {
         if(this.vehicles.size() == 1)
             return this.vehicles.get(0);
 
-        return this.vehicles.get(ThreadLocalRandom.current().nextInt(this.vehicles.size() + 1));
+        return this.vehicles.get(ThreadLocalRandom.current().nextInt(this.vehicles.size()));
     }
 
     /**
