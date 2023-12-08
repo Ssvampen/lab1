@@ -27,8 +27,7 @@ public class VehicleGroup {
     private static final List<Supplier<Vehicle>> VEHICLE_SUPPLIERS = Arrays.asList(
             Saab95::new,
             Volvo240::new,
-            () -> new Scania(new LoadingPlatform()),
-            () -> new Lorry(new Ramp(10)));
+            () -> new Scania(new LoadingPlatform()));
 
     /**
      * Creates a new vehicle group.
