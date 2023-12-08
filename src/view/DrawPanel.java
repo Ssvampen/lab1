@@ -42,7 +42,7 @@ public class DrawPanel extends JPanel{
      */
     public void loadImage(String name){
         try {
-            InputStream stream = DrawPanel.class.getResourceAsStream("../pics/" + name + ".jpg");
+            InputStream stream = DrawPanel.class.getResourceAsStream("../../pics/" + name + ".jpg");
             if(stream == null)
                 return;
 
