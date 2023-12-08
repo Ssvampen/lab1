@@ -121,6 +121,7 @@ public class VehicleGroup {
      * @param amount Angle to lift bed.
      */
     public void liftBed(int amount){
+        System.out.println("lift " + amount);
         getPlatformableVehicles().forEach(p -> p.decreasePlatformAngle(amount));
     }
 

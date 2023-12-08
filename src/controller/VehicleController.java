@@ -16,7 +16,7 @@ public class VehicleController extends JPanel {
     private final JButton turboOnButton = new JButton("Saab Turbo on");
     private final JButton turboOffButton = new JButton("Saab Turbo off");
     private final JButton liftBedButton = new JButton("Scania Lift Bed");
-    private final JButton lowerBedButton = new JButton("Lower Lift Bed");
+    private final JButton lowerBedButton = new JButton("Scania Lower Bed");
 
     private final JButton turnLeftButton = new JButton("Turn Left");
     private final JButton turnRightButton = new JButton("Turn Right");
