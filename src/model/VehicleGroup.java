@@ -2,7 +2,6 @@ package src.model;
 
 import src.model.hingeable.LoadingPlatform;
 import src.model.hingeable.Platformable;
-import src.model.hingeable.Ramp;
 import src.model.observers.VehicleAddRemoveObserver;
 import src.model.observers.VehicleMovementObserver;
 import src.model.vehicle.*;

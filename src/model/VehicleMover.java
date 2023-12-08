@@ -74,8 +74,8 @@ public class VehicleMover implements ActionListener {
             vehicle.setDirection(vehicle.getDirection().invert());
             vehicle.startEngine();
 
-            x = Math.min(Math.max(0,x), width - IMAGE_WIDTH);
-            y = Math.min(Math.max(0,y), height - IMAGE_HEIGHT);
+            x = Math.min(Math.max(1,x), width - IMAGE_WIDTH);
+            y = Math.min(Math.max(1,y), height - IMAGE_HEIGHT);
             vehicle.setPosition(new Vector(x, y));
         }
 
