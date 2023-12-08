@@ -23,6 +23,10 @@ public class VehicleMover implements ActionListener {
     private final int width;
     private final int height;
 
+    public static int IMAGE_WIDTH = 100;
+    public static int IMAGE_HEIGHT = 60;
+
+
     public VehicleMover(List<Vehicle> vehicles, int width, int height){
         this.vehicles = vehicles;
         this.observers = new ArrayList<>();
@@ -56,23 +60,19 @@ public class VehicleMover implements ActionListener {
         double x = vehicle.getPosition().getX();
         double y = vehicle.getPosition().getY();
 
-        /*
-        int errorFixHeight = 55;
-        int errorFixWidth = 100;
-        boolean outsideX = x < 0 || x > width - errorFixWidth;
-        boolean outsideY =  y < 0 || y > height - errorFixHeight;
+        boolean outsideX = x < 0 || x > width - IMAGE_WIDTH;
+        boolean outsideY =  y < 0 || y > height - IMAGE_HEIGHT;
         // Make vehicle turn if it is outside bounds
-        // The true panel size is not used, hence the errorFix integer. TODO: Search for better solution
         if(outsideX || outsideY) {
             vehicle.stopEngine();
             vehicle.turnRight();
             vehicle.turnRight();
             vehicle.startEngine();
-            x = Math.min(Math.max(0,x),width-errorFixWidth);
-            y = Math.min(Math.max(0,y),height-errorFixHeight);
+            x = Math.min(Math.max(0,x),width-IMAGE_WIDTH);
+            y = Math.min(Math.max(0,y),height-IMAGE_HEIGHT);
+            vehicle.setPosition(new Vector(x, y));
         }
 
-        vehicle.setPosition(new Vector(x, y));*/
     }
 
     /**

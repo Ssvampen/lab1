@@ -25,8 +25,10 @@ public class Application implements VehicleMovementObserver, VehicleAddRemoveObs
     private Application(){
         int width = 800;
         int height = 800;
-        group = new VehicleGroup(width, height);
-        view = new VehicleView(new VehicleController(group, new GasController(), width), width, height);
+
+        int worldHeight = height - 240;
+        group = new VehicleGroup(width, worldHeight);
+        view = new VehicleView(new VehicleController(group, new GasController(), width), width, height, width, worldHeight);
     }
 
     public void run(){
@@ -47,7 +49,6 @@ public class Application implements VehicleMovementObserver, VehicleAddRemoveObs
         Vehicle scania = VehicleFactory.createNewScania(new LoadingPlatform());
         scania.setPosition(new Vector(0, 200));
         group.addVehicle(scania);
-
 
         // Start the timer
         group.startAnimation();

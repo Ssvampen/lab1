@@ -14,9 +14,9 @@ public class VehicleView extends JFrame {
     private final DrawPanel drawPanel;
     private final VehicleController vehicleController;
 
-    public VehicleView(VehicleController vehicleController, int width, int height){
+    public VehicleView(VehicleController vehicleController, int width, int height, int worldWidth, int worldHeight){
         this.vehicleController = vehicleController;
-        this.drawPanel = new DrawPanel(width, width-240);
+        this.drawPanel = new DrawPanel(worldWidth, worldHeight);
 
         setTitle("VehicleSim v1.0");
         this.setPreferredSize(new Dimension(width, height));
