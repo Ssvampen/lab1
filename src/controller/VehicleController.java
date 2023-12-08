@@ -13,10 +13,10 @@ import java.awt.*;
 public class VehicleController extends JPanel {
     private final JButton gasButton = new JButton("Gas");
     private final JButton brakeButton = new JButton("Brake");
-    private final JButton turboOnButton = new JButton("Saab Turbo on");
-    private final JButton turboOffButton = new JButton("Saab Turbo off");
-    private final JButton liftBedButton = new JButton("Scania Lift Bed");
-    private final JButton lowerBedButton = new JButton("Scania Lower Bed");
+    private final JButton turboOnButton = new JButton("Turbo on");
+    private final JButton turboOffButton = new JButton("Turbo off");
+    private final JButton liftBedButton = new JButton("Lift bed");
+    private final JButton lowerBedButton = new JButton("Lower bed");
 
     private final JButton turnLeftButton = new JButton("Turn Left");
     private final JButton turnRightButton = new JButton("Turn Right");
@@ -63,7 +63,7 @@ public class VehicleController extends JPanel {
         this.add(addVehicleButton);
         this.add(removeVehicleButton);
 
-        addVehicleButton.addActionListener(e -> group.addVehicle(new Volvo240()));
+        addVehicleButton.addActionListener(e -> group.addRandomVehicle());
         removeVehicleButton.addActionListener(e -> group.removeVehicle());
 
         startButton.setBackground(Color.blue);

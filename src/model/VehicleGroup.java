@@ -1,13 +1,17 @@
 package src.model;
 
+import src.model.hingeable.LoadingPlatform;
 import src.model.hingeable.Platformable;
+import src.model.hingeable.Ramp;
 import src.model.observers.VehicleAddRemoveObserver;
 import src.model.observers.VehicleMovementObserver;
-import src.model.vehicle.Vehicle;
+import src.model.vehicle.*;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.concurrent.ThreadLocalRandom;
+import java.util.function.Supplier;
 import java.util.stream.Stream;
 
 /**
@@ -19,6 +23,12 @@ public class VehicleGroup {
     private final VehicleMover vehicleMover;
 
     private final List<VehicleAddRemoveObserver> observers;
+
+    private static final List<Supplier<Vehicle>> VEHICLE_SUPPLIERS = Arrays.asList(
+            Saab95::new,
+            Volvo240::new,
+            () -> new Scania(new LoadingPlatform()),
+            () -> new Lorry(new Ramp(10)));
 
     /**
      * Creates a new vehicle group.
@@ -50,6 +60,11 @@ public class VehicleGroup {
 
         this.vehicles.add(vehicle);
         this.notifyAddListeners(vehicle);
+    }
+
+    public Vehicle addRandomVehicle(){
+        int randomIndex = ThreadLocalRandom.current().nextInt(VEHICLE_SUPPLIERS.size() + 1);
+        return VEHICLE_SUPPLIERS.get(randomIndex).get();
     }
 
     /**
@@ -121,7 +136,6 @@ public class VehicleGroup {
      * @param amount Angle to lift bed.
      */
     public void liftBed(int amount){
-        System.out.println("lift " + amount);
         getPlatformableVehicles().forEach(p -> p.decreasePlatformAngle(amount));
     }
 
@@ -192,7 +206,7 @@ public class VehicleGroup {
         if(this.vehicles.size() == 1)
             return this.vehicles.get(0);
 
-        return this.vehicles.get(ThreadLocalRandom.current().nextInt(this.vehicles.size() - 1));
+        return this.vehicles.get(ThreadLocalRandom.current().nextInt(this.vehicles.size() + 1));
     }
 
     /**
