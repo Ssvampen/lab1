@@ -2,7 +2,7 @@ package Test;
 
 import org.junit.Before;
 import org.junit.Test;
-import src.vehicle.Saab95;
+import src.model.vehicle.Saab95;
 
 import static org.junit.Assert.assertEquals;
 

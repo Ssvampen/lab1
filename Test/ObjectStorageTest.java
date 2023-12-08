@@ -1,7 +1,7 @@
 package Test;
 
-import src.ObjectStorage;
-import src.vehicle.Volvo240;
+import src.model.ObjectStorage;
+import src.model.vehicle.Volvo240;
 
 import org.junit.Test;
 import org.junit.Before;

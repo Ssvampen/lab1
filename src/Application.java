@@ -1,8 +1,15 @@
 package src;
 
-import src.hingeable.LoadingPlatform;
-import src.util.Vector;
-import src.vehicle.*;
+import src.controller.GasController;
+import src.controller.VehicleController;
+import src.model.hingeable.LoadingPlatform;
+import src.model.observers.VehicleAddRemoveObserver;
+import src.model.VehicleGroup;
+import src.model.observers.VehicleMovementObserver;
+import src.model.util.Vector;
+import src.model.vehicle.*;
+import src.view.RenderObject;
+import src.view.VehicleView;
 
 import java.awt.*;
 import java.util.Arrays;
@@ -19,7 +26,7 @@ public class Application implements VehicleMovementObserver, VehicleAddRemoveObs
         int width = 800;
         int height = 800;
         group = new VehicleGroup(width, height);
-        view = new VehicleView(new VehicleController(group, new GasController(), width), height, height);
+        view = new VehicleView(new VehicleController(group, new GasController(), width), width, height);
     }
 
     public void run(){

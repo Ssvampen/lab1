@@ -2,7 +2,7 @@ package Test;
 
 import org.junit.Before;
 import org.junit.Test;
-import src.hingeable.LoadingPlatform;
+import src.model.hingeable.LoadingPlatform;
 
 import static org.junit.Assert.*;
 

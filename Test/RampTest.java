@@ -1,13 +1,13 @@
 package Test;
 
-import src.vehicle.Lorry;
-import src.hingeable.Ramp;
+import src.model.vehicle.Lorry;
+import src.model.hingeable.Ramp;
 
 import static org.junit.Assert.*;
 
 import org.junit.Before;
 import org.junit.Test;
-import src.vehicle.Volvo240;
+import src.model.vehicle.Volvo240;
 
 
 public class RampTest {

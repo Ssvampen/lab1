@@ -2,8 +2,8 @@ package Test;
 
 import org.junit.Before;
 import org.junit.Test;
-import src.Mechanic;
-import src.vehicle.Volvo240;
+import src.model.Mechanic;
+import src.model.vehicle.Volvo240;
 
 import static org.junit.Assert.assertEquals;
 

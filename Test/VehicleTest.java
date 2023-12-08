@@ -3,9 +3,9 @@ package Test;
 import org.junit.Before;
 import org.junit.Test;
 import java.awt.Color;
-import src.vehicle.Vehicle;
-import src.vehicle.Volvo240;
-import src.util.Vector;
+import src.model.vehicle.Vehicle;
+import src.model.vehicle.Volvo240;
+import src.model.util.Vector;
 
 import static org.junit.Assert.*;
 

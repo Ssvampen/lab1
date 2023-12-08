@@ -3,9 +3,9 @@ package Test;
 import org.junit.Before;
 import org.junit.Test;
 
-import src.vehicle.Scania;
-import src.hingeable.LoadingPlatform;
-import src.util.Vector;
+import src.model.vehicle.Scania;
+import src.model.hingeable.LoadingPlatform;
+import src.model.util.Vector;
 
 import static org.junit.Assert.*;
 

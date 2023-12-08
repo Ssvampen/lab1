@@ -2,10 +2,10 @@ package Test;
 
 import org.junit.Before;
 import org.junit.Test;
-import src.hingeable.Ramp;
-import src.util.Vector;
-import src.vehicle.Lorry;
-import src.vehicle.Volvo240;
+import src.model.hingeable.Ramp;
+import src.model.util.Vector;
+import src.model.vehicle.Lorry;
+import src.model.vehicle.Volvo240;
 
 import static org.junit.Assert.*;
 
