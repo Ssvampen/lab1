@@ -10,7 +10,7 @@ import java.awt.*;
 public class GasController extends JPanel {
     private final JLabel gasLabel = new JLabel("Amount of gas");
     private JSpinner gasSpinner;
-    int gasAmount = 0;
+    private int gasAmount = 0;
 
     public void initComponents(){
         SpinnerModel spinnerModel =
