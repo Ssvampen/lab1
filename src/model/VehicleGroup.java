@@ -62,9 +62,10 @@ public class VehicleGroup {
         this.notifyAddListeners(vehicle);
     }
 
-    public Vehicle addRandomVehicle(){
+    public void addRandomVehicle(){
         int randomIndex = ThreadLocalRandom.current().nextInt(VEHICLE_SUPPLIERS.size());
-        return VEHICLE_SUPPLIERS.get(randomIndex).get();
+        Vehicle vehicle = VEHICLE_SUPPLIERS.get(randomIndex).get();
+        addVehicle(vehicle);
     }
 
     /**
