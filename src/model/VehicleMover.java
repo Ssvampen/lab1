@@ -23,8 +23,8 @@ public class VehicleMover implements ActionListener {
     private final int width;
     private final int height;
 
-    public static int IMAGE_WIDTH = 100;
-    public static int IMAGE_HEIGHT = 60;
+    public static int VEHICLE_WIDTH = 100;
+    public static int VEHICLE_HEIGHT = 60;
 
 
     /**
@@ -66,16 +66,16 @@ public class VehicleMover implements ActionListener {
         double x = vehicle.getPosition().getX();
         double y = vehicle.getPosition().getY();
 
-        boolean outsideX = x < 0 || x > width - IMAGE_WIDTH;
-        boolean outsideY =  y < 0 || y > height - IMAGE_HEIGHT;
+        boolean outsideX = x < 0 || x > width - VEHICLE_WIDTH;
+        boolean outsideY =  y < 0 || y > height - VEHICLE_HEIGHT;
         // Make vehicle turn if it is outside bounds
         if(outsideX || outsideY) {
             vehicle.stopEngine();
             vehicle.setDirection(vehicle.getDirection().invert());
             vehicle.startEngine();
 
-            x = Math.min(Math.max(1,x), width - IMAGE_WIDTH);
-            y = Math.min(Math.max(1,y), height - IMAGE_HEIGHT);
+            x = Math.min(Math.max(1,x), width - VEHICLE_WIDTH);
+            y = Math.min(Math.max(1,y), height - VEHICLE_HEIGHT);
             vehicle.setPosition(new Vector(x, y));
         }
 
