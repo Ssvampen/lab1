@@ -3,6 +3,10 @@ package src.controller;
 import javax.swing.*;
 import java.awt.*;
 
+/**
+ * Represents the controller for the gas amount in our MVC.
+ * Listens for changes to the gas spinner and updates the gas amount.
+ */
 public class GasController extends JPanel {
     private final JLabel gasLabel = new JLabel("Amount of gas");
     private JSpinner gasSpinner;

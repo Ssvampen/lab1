@@ -2,11 +2,12 @@ package src.model.vehicle;
 
 import java.awt.*;
 
+import src.model.Turboable;
 import src.model.util.WeightClass;
 
-public class Saab95 extends Vehicle {
+public class Saab95 extends Vehicle implements Turboable {
 
-    public boolean turboOn;
+    private boolean turboOn;
 
     public Saab95() {
         super(2, Color.red, 125, "Saab95", WeightClass.SMALL);
@@ -25,6 +26,11 @@ public class Saab95 extends Vehicle {
      */
     public void setTurboOff() {
         turboOn = false;
+    }
+
+    @Override
+    public boolean isTurboOn() {
+        return turboOn;
     }
 
     /**

@@ -3,6 +3,9 @@ package src.model.vehicle;
 import src.model.hingeable.LoadingPlatform;
 import src.model.hingeable.Ramp;
 
+/**
+ * Represents a factory that creates {@link Vehicle}s.
+ */
 public class VehicleFactory {
     public static Vehicle createNewVolvo240() {
         return new Volvo240();

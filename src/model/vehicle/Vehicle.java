@@ -64,7 +64,6 @@ public abstract class Vehicle implements Movable {
         color = clr;
     }
 
-
     public void startEngine(){
         engine.start();
     }
@@ -99,7 +98,7 @@ public abstract class Vehicle implements Movable {
      * Test if speed is 0
      * @return true if vehicle is stationary, else false
      */
-    public boolean vehicleIsStationary() {
+    public boolean isStationary() {
         return engine.isStationary();
     }
 

@@ -15,9 +15,8 @@ public interface Rampable {
     void lowerRamp();
 
     /**
-     * Gets the amount of cars on this ramp.
-     * @return Amount of cars
+     * Gets the amount of entities on this ramp.
+     * @return Entity count
      */
-
     int getEntityCount();
 }

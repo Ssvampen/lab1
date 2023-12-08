@@ -16,28 +16,50 @@ import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 
+/**
+ * The entry point of our application.
+ * Responsible for setting up all components in our architecture and also maps Vehicle -> Render object.
+ */
 public class Application implements VehicleMovementObserver, VehicleAddRemoveObserver {
+
+    private static final int WINDOW_WIDTH = 800;
+    private static final int WINDOW_HEIGHT = 800;
+    private static final String[] SUPPORTED_MODELS = new String[]{"Saab95", "Scania_1337", "Volvo240"};
 
     private final Map<Vehicle, RenderObject> renderObjects = new HashMap<>();
     private final VehicleGroup group;
     private final VehicleView view;
 
     private Application(){
-        int width = 800;
-        int height = 800;
+        int worldHeight = WINDOW_HEIGHT - 240;
+        group = new VehicleGroup(WINDOW_WIDTH, worldHeight);
 
-        int worldHeight = height - 240;
-        group = new VehicleGroup(width, worldHeight);
-        view = new VehicleView(new VehicleController(group, new GasController(), width), width, height, width, worldHeight);
+        GasController gasController = new GasController();
+        VehicleController vehicleController = new VehicleController(group, gasController, WINDOW_WIDTH);
+
+        view = new VehicleView(vehicleController, WINDOW_WIDTH, WINDOW_HEIGHT, WINDOW_WIDTH, worldHeight);
+    }
+
+    public static void main(String[] args) {
+        new Application().run();
     }
 
     public void run(){
         view.initComponents();
-        Arrays.asList("Saab95", "Scania_1337", "Volvo240").forEach(view::loadImage);
+        Arrays.stream(SUPPORTED_MODELS)
+                .forEach(view::loadImage);
 
+        // Setup this application as an observer.
         group.addVehicleAddRemoveListener(this);
         group.addVehicleMoveListener(this);
 
+        addVehicles();
+
+        // Start the timer
+        group.startAnimation();
+    }
+
+    private void addVehicles(){
         Vehicle volvo = VehicleFactory.createNewVolvo240();
         volvo.setPosition(new Vector(0, 0));
         group.addVehicle(volvo);
@@ -49,14 +71,8 @@ public class Application implements VehicleMovementObserver, VehicleAddRemoveObs
         Vehicle scania = VehicleFactory.createNewScania(new LoadingPlatform());
         scania.setPosition(new Vector(0, 200));
         group.addVehicle(scania);
-
-        // Start the timer
-        group.startAnimation();
     }
 
-    public static void main(String[] args) {
-        new Application().run();
-    }
 
     public void onVehicleMoved(Vehicle vehicle, Vector position){
         RenderObject renderObject = renderObjects.get(vehicle);

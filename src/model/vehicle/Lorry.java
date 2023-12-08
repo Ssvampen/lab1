@@ -47,7 +47,7 @@ public class Lorry extends Truck implements Rampable {
 
     @Override
     public void lowerRamp(){
-        if(!vehicleIsStationary())
+        if(!isStationary())
             return;
 
         this.ramp.lowerRamp();

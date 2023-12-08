@@ -11,8 +11,9 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-// This panel represent the animated part of the view with the car images.
-
+/**
+ * This panel represent the animated part of the view with the car images.
+ */
 public class DrawPanel extends JPanel{
 
     private final Map<String, BufferedImage> loadedImages = new HashMap<>();

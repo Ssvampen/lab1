@@ -27,6 +27,12 @@ public class VehicleMover implements ActionListener {
     public static int IMAGE_HEIGHT = 60;
 
 
+    /**
+     * Creates a new vehicle mover.
+     * @param vehicles List of vehicles to move.
+     * @param width Width of the world.
+     * @param height Height of the world.
+     */
     public VehicleMover(List<Vehicle> vehicles, int width, int height){
         this.vehicles = vehicles;
         this.observers = new ArrayList<>();
@@ -65,11 +71,11 @@ public class VehicleMover implements ActionListener {
         // Make vehicle turn if it is outside bounds
         if(outsideX || outsideY) {
             vehicle.stopEngine();
-            vehicle.turnRight();
-            vehicle.turnRight();
+            vehicle.setDirection(vehicle.getDirection().invert());
             vehicle.startEngine();
-            x = Math.min(Math.max(0,x),width-IMAGE_WIDTH);
-            y = Math.min(Math.max(0,y),height-IMAGE_HEIGHT);
+
+            x = Math.min(Math.max(0,x), width - IMAGE_WIDTH);
+            y = Math.min(Math.max(0,y), height - IMAGE_HEIGHT);
             vehicle.setPosition(new Vector(x, y));
         }
 

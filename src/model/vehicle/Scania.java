@@ -6,8 +6,6 @@ import java.awt.*;
 
 /**
  * Represents a Scania model 1337 with a loading platform.
- *
- * Termminoli
  */
 public class Scania extends Truck {
 
@@ -27,7 +25,7 @@ public class Scania extends Truck {
      * @param amount The amount which the loading platform should be raised.
      */
     public void increaseLoadingPlatformAngle(float amount) {
-        if(!vehicleIsStationary())
+        if(!isStationary())
             return;
 
         loadingPlatform.increasePlatformAngle(amount);
@@ -39,7 +37,7 @@ public class Scania extends Truck {
      */
     public void decreaseLoadingPlatformAngle(float amount) {
         // The vehicle should not be able to move when "loading platform" is up. Therefor it is not necessary to check whether the vehicle is moving or not
-        if(!vehicleIsStationary())
+        if(!isStationary())
             return;
 
         loadingPlatform.decreasePlatformAngle(amount);

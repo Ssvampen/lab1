@@ -1,7 +1,7 @@
 package src.model.util;
 
 /**
- * Represents a weight class that a car can have.
+ * Represents a weight class that an entity can have.
  */
 public enum WeightClass {
 

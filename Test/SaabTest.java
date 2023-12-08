@@ -40,13 +40,13 @@ public class SaabTest {
     @Test
     public void testSetTurboOn(){
         saab.setTurboOn();
-        assertEquals(saab.turboOn, true);
+        assertEquals(saab.isTurboOn(), true);
     }
 
     @Test
     public void testSetTurboOff(){
         saab.setTurboOff();
-        assertEquals(saab.turboOn, false);
+        assertEquals(saab.isTurboOn(), false);
     }
 
 

@@ -14,6 +14,14 @@ public class VehicleView extends JFrame {
     private final DrawPanel drawPanel;
     private final VehicleController vehicleController;
 
+    /**
+     * Creates a new vehicle view.
+     * @param vehicleController Controller to add to this view.
+     * @param width Width of the window.
+     * @param height Height of the window.
+     * @param worldWidth Width of the world
+     * @param worldHeight Height of the world.
+     */
     public VehicleView(VehicleController vehicleController, int width, int height, int worldWidth, int worldHeight){
         this.vehicleController = vehicleController;
         this.drawPanel = new DrawPanel(worldWidth, worldHeight);

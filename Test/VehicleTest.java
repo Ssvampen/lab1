@@ -89,7 +89,7 @@ public class VehicleTest {
 
     @Test
     public void testVehicleIsStationary(){
-        assertTrue(vehicle.vehicleIsStationary());
+        assertTrue(vehicle.isStationary());
     }
 
     @Test

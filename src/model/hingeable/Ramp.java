@@ -19,10 +19,10 @@ public class Ramp implements Hingeable, Rampable, Entity {
     private Vector position;
     private Vector direction;
     private final ObjectStorage<Entity> entities;
-    private List<Entity> unloadedEntitys = new ArrayList<>();
     /** The list unloadedEntitys is used to prevent entities being placed on the
-    * same spot when unloaded.
+     * same spot when unloaded.
      * */
+    private List<Entity> unloadedEntitys = new ArrayList<>();
 
 
     /**
@@ -71,6 +71,9 @@ public class Ramp implements Hingeable, Rampable, Entity {
         }
     }
 
+    /**
+     * Clears the unloaded entities list.
+     */
     private void deleteUnloadedEntitysList(){
         unloadedEntitys = new ArrayList<>();
     }
@@ -85,6 +88,10 @@ public class Ramp implements Hingeable, Rampable, Entity {
         deleteUnloadedEntitysList();
     }
 
+    /**
+     * Returns whether the specified entity is close enough to the ramp to be added.
+     * @param entity Entity to check distance to.
+     */
     private boolean isEntityCloseEnough(Entity entity){
         return entity.getPosition().calculateDistanceTo(this.getPosition()) < 1.0;
     }
@@ -112,9 +119,7 @@ public class Ramp implements Hingeable, Rampable, Entity {
     @Override
     public void setPosition(Vector position) {
         this.position = position;
-        for(Entity entity: entities){
-            entity.setPosition(position);
-        }
+        this.entities.forEach(e -> e.setPosition(position));
     }
 
     @Override
@@ -125,9 +130,7 @@ public class Ramp implements Hingeable, Rampable, Entity {
     @Override
     public void setDirection(Vector direction) {
         this.direction = direction;
-        for(Entity entity: entities){
-            entity.setDirection(direction);
-        }
+        this.entities.forEach(e -> e.setDirection(position));
     }
 
     @Override
